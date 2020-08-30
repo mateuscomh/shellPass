@@ -3,22 +3,34 @@
 #-----------HEADER-------------------------------------------------------------|
 # AUTOR             : Matheus Martins 3mhenrique@gmail.com
 # HOMEPAGE          : https://github.com/mateuscomh 
-# DATA CRIAÃ‡ÃƒO      : 29/08/2020 
+# DATA CRIAÇÃO      : 29/08/2020 
 # PROGRAMA          : Shell-Base
-# VERSÃƒO            : 1.0.2
-# LICENÃ‡A           : GPL3
-# PEQUENA-DESCRIÃ‡ÃƒO : Programa para criar senhas seguras via terminal
+# VERSÃO            : 1.1
+# LICENÇA           : GPL3
+# PEQUENA-DESCRIÇÃO : Programa para criar senhas seguras via terminal
 #
 # CHANGELOG :
-
-# 29/08/2020 18:00 - Adicionada validaÃ§Ã£o de apenas nÃºmero a ser recebido pelo usuÃ¡rio
-#                  - Adicionado cabeÃ§alho para commit no git
+#
+# 29/08/2020 18:00 - Adicionada validação de apenas número a ser recebido pelo usuário
+#                  - Adicionado cabeçalho para commit no git
+# 30/08/2020 13:00 - Adicionado status de help e versao
+#
 #----------FIM-HEADER---------------------------------------------------------|
 
 fecha="\033[m"
 verde="\033[32;1m"
 vermelho="\033[31;1m"
 amarelo="\033[01;33m"
+
+case "$1" in
+  -h | --help ) echo "Programa para gerar passwords com complexida alfanumérica e com cacteres especiais rapidamente via terminal"
+               echo "Autor mateuscomh vulgo Django"
+               exit 0 ;;
+  -v | --version ) echo "Versão 1.1"
+                  exit 0 ;;
+  *) echo "$vermelho Opção inválida $fecha"
+      exit 1 ;;
+esac
 
 #----------FUNCOES------------------------------------------------------------|
 gerarsenha(){
@@ -27,15 +39,15 @@ echo "$verde Informe a quantidade de caracteres para a ser gerada $fecha"
 read max
 
 case $max in
-  -h | --help) echo "Programa para gerar passwords com complexida alfanumÃ©rica e com cacteres especiais rapidamente via terminal"
+    -h | --help) echo "Programa para gerar passwords com complexida alfanumérica e com cacteres especiais rapidamente via terminal"
                echo "Autor mateuscomh vulgo Django"
                exit 0 ;;
-  -v | --version) echo "VersÃ£o 1.0.2"
+  -v | --version) echo "Versão 1.0.2"
                   exit 0 ;;
-  ''|*[!0-9]*) echo "$vermelho Informe apenas com nÃºmeros o tamanho da senha a ser gerada $fecha" >&2
+  ''|*[!0-9]*) echo "$vermelho Informe apenas com números o tamanho da senha a ser gerada $fecha" >&2
   exit 1;;
   *)
-    echo "$amarelo"
+    echo "$vermelho Senha gerada: $amarelo"
     </dev/urandom tr -dc 'A-Za-z0-9!"#$%&'\''()*+,-./:;<=>?@[\]^_{|}~' | head -c $max  ; echo "$fecha" 
     ;;
 esac
