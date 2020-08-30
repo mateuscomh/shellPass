@@ -3,16 +3,16 @@
 #-----------HEADER-------------------------------------------------------------|
 # AUTOR             : Matheus Martins 3mhenrique@gmail.com
 # HOMEPAGE          : https://github.com/mateuscomh 
-# DATA CRIAÇÃO      : 29/08/2020 
+# DATA CRIAÃ‡ÃƒO      : 29/08/2020 
 # PROGRAMA          : Shell-Base
-# VERSÃO            : 1.0.2
-# LICENÇA           : GPL3
-# PEQUENA-DESCRIÇÃO : Programa para criar senhas seguras via terminal
+# VERSÃƒO            : 1.0.2
+# LICENÃ‡A           : GPL3
+# PEQUENA-DESCRIÃ‡ÃƒO : Programa para criar senhas seguras via terminal
 #
 # CHANGELOG :
 
-# 29/08/2020 18:00 - Adicionada validação de apenas número a ser recebido pelo usuário
-#                  - Adicionado cabeçalho para commit no git
+# 29/08/2020 18:00 - Adicionada validaÃ§Ã£o de apenas nÃºmero a ser recebido pelo usuÃ¡rio
+#                  - Adicionado cabeÃ§alho para commit no git
 #----------FIM-HEADER---------------------------------------------------------|
 
 fecha="\033[m"
@@ -27,7 +27,12 @@ echo "$verde Informe a quantidade de caracteres para a ser gerada $fecha"
 read max
 
 case $max in
-  ''|*[!0-9]*) echo "$vermelho Informe apenas com números o tamanho da senha a ser gerada $fecha" >&2
+  -h | --help) echo "Programa para gerar passwords com complexida alfanumÃ©rica e com cacteres especiais rapidamente via terminal"
+               echo "Autor mateuscomh vulgo Django"
+               exit 0 ;;
+  -v | --version) echo "VersÃ£o 1.0.2"
+                  exit 0 ;;
+  ''|*[!0-9]*) echo "$vermelho Informe apenas com nÃºmeros o tamanho da senha a ser gerada $fecha" >&2
   exit 1;;
   *)
     echo "$amarelo"
