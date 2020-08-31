@@ -50,6 +50,7 @@ case $max in
     ;;
 esac
 }
+
 #----------FIM-FUNCOES--------------------------------------------------------|
 #Executando...
 gerarsenha
