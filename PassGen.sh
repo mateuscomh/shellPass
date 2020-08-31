@@ -16,7 +16,6 @@
 # 30/08/2020 13:00 - Adicionado status de help e versao
 #
 #----------FIM-HEADER---------------------------------------------------------|
-
 fecha="\033[m"
 verde="\033[32;1m"
 vermelho="\033[31;1m"
@@ -31,7 +30,6 @@ case "$1" in
   *) echo "$vermelho Opção inválida $fecha"
       exit 1 ;;
 esac
-
 #----------FUNCOES------------------------------------------------------------|
 gerarsenha(){
 
