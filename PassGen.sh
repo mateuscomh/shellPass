@@ -40,13 +40,13 @@ esac
 #----------FIM-FUNCOES--------------------------------------------------------|
 #Executando...
 case "$1" in
-  -h | --help ) echo "Programa para gerar passwords com complexida alfanum�rica e com cacteres especiais rapidamente via terminal"
+  -h | --help ) echo "Programa para gerar passwords com complexidade alfanumérica e com cacteres especiais rapidamente via terminal"
                echo "Autor mateuscomh - Django"
                exit 0 ;;
-  -v | --version ) echo "Vers�o 1.1"
+  -v | --version ) echo "Versão 1.1"
                   exit 0 ;;
   '') gerarsenha 
       exit 0;;
-  *) echo "$vermelho Op��o inv�lida $fecha"
+  *) echo "$vermelho Opção inválida $fecha"
       exit 1 ;;
 esac
