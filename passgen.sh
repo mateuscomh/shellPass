@@ -15,7 +15,6 @@
 # 30/08/2020 13:00 - Adicionado status de help e versao
 # 09/09/2021 10:00 - Implementado recurso de escolha de tipos de senha
 #                  - Atualizado no repositorio GIT e renomeado para fácil acesso
-#
 #----------FIM-HEADER---------------------------------------------------------|
 fecha="\033[m"
 verde="\033[32;1m"
