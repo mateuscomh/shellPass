@@ -23,7 +23,7 @@ vermelho="\033[31;1m"
 amarelo="\033[01;33m"
 
 #----------FUNCOES------------------------------------------------------------|
-gerarsenha(){
+_gerarsenha(){
 
 echo "$verde Informe a QUANTIDADE de caracteres para a ser gerada: $fecha"
 read -r max
@@ -61,13 +61,15 @@ case "$1" in
                exit 0 ;;
   -v | --version ) echo "$verde Versão 1.2 $fecha"
                   exit 0 ;;
- '') escolha=y 
-   while [ "$escolha" != "n" ]; do
-      gerarsenha
-      echo "$verde Deseja gerar nova senha [y/n]? $fecha"
-      read -r escolha 
-     done
-  ;;
+ '') OP=s 
+   while [ "$OP" = "s" ]; do
+      _gerarsenha
+      read -p "$amarelo Deseja gerar nova senha? [s/n] $fecha" -e -n 1 OP
+      case $OP in 
+      	s|S) _gerarsenha ;;
+      	n|N) break ;;
+      	*) read -p "$amarelo Informar [s/n] para gerar nova senha $fecha" -e -n -1 OP ;;
+      esac
   *) echo "$vermelho Opção inválida $fecha"
       exit 1 ;;
 esac
