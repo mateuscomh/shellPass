@@ -61,11 +61,8 @@ case "$1" in
                exit 0 ;;
   -v | --version ) echo "$verde Versão 1.2 $fecha"
                   exit 0 ;;
- '') gerarsenha
-     echo "$verde Deseja gerar nova senha [y/n]? $fecha"
-     read -r escolha 
-     while [ $escolha != "n" ]; do
-       gerarsenha
+ '') while [ $escolha != "n" ]; do
+      gerarsenha
       echo "$verde Deseja gerar nova senha [y/n]? $fecha"
       read -r escolha 
      done
