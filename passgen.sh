@@ -5,9 +5,10 @@
 # HOMEPAGE          : https://github.com/mateuscomh 
 # DATA CRIAÇÃO      : 29/08/2020 
 # PROGRAMA          : Shell-Base
-# VERSÃO            : 1.2
+# VERSÃO            : 1.5
 # LICENÇA           : GPL3
-# PEQUENA-DESCRICÃO: Programa para criar senhas seguras via terminal
+# PEQUENA-DESCRICÃO : Programa para criar senhas seguras via terminal
+#                   - Utilizar desenvolvido em shell: user SH para execucao com cores
 #
 # CHANGELOG :
 # 29/08/2020 18:00 - Adicionada validaçãoo de apenas número a ser recebido pelo usuário
@@ -15,6 +16,7 @@
 # 30/08/2020 13:00 - Adicionado status de help e versao
 # 09/09/2021 10:00 - Implementado recurso de escolha de tipos de senha
 #                  - Atualizado no repositorio GIT e renomeado para fácil acesso
+# 12/10/2021 18:00 - Adicionado looping de novas senhas
 #
 #----------FIM-HEADER---------------------------------------------------------|
 fecha="\033[m"
@@ -47,8 +49,9 @@ read -r tipo
 			</dev/urandom tr -dc 'A-Za-z0-9' | head -c "$max"  ; echo "$fecha" 
 			;;
 		3) echo "$vermelho Senha gerada: $amarelo"
-			</dev/urandom tr -dc 'A-Za-z0-9!"#$%&'\''()*+,-./:;<=>?@[\]^_{|}~' | head -c "$max"  ; echo "$fecha" 
-    ;;
+			</dev/urandom tr -dc 'A-Za-z0-9!"#$%&'\''()*+,-./:;<=>?@[\]^_{|}~' |
+              head -c "$max" ; echo "$fecha" ;;
+        *) echo "$vermelho Utilizar as opcoes [1,2,3] $fecha" ;;
 	esac
 esac
 }
@@ -59,17 +62,17 @@ case "$1" in
     alfanumérica e com caracteres especiais rapidamente via terminal $fecha"
                echo "$verde Autor mateuscomh vulgo Django $fecha"
                exit 0 ;;
-  -v | --version ) echo "$verde Versão 1.2 $fecha"
+  -v | --version ) echo "$verde Versão 1.5 $fecha"
                   exit 0 ;;
  '') OP=s 
-   while [ "$OP" = "s" ]; do
-      _gerarsenha
-      read -p "$amarelo Deseja gerar nova senha? [s/n] $fecha" -e -n 1 OP
+  while [ "$OP" = "s" ]; do
       case $OP in 
-      	s|S) _gerarsenha ;;
+      	s|S) _gerarsenha 
+              read -p "Deseja gerar nova senha? [s/n]"  OP ;;
       	n|N) break ;;
-      	*) read -p "$amarelo Informar [s/n] para gerar nova senha $fecha" -e -n -1 OP ;;
+      	*) read -p "$amarelo Informar [s/n] para gerar nova senha $fecha" OP ;;
       esac
-  *) echo "$vermelho Opção inválida $fecha"
-      exit 1 ;;
+  done;; 
+  *) echo "$vermelho Opção inválida, não é necessário parâmetros $fecha" 
+     exit 1 ;;
 esac
