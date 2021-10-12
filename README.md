@@ -1,2 +1,7 @@
 # PasswordGeradorShell
-Programa para gerar password exclusivos e alfanuméricos rapidamente via linha de comando
+Aplicação para gerar passwords exclusivos rapidamente via terminal shell
+
+Tipos de senhas geradas
+ - Numérica
+ - Alfanumérica
+ - Alfanumérica + Caracteres especiais
