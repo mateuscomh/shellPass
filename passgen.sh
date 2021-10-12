@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/env sh
 
 #-----------HEADER-------------------------------------------------------------|
 # AUTOR             : Matheus Martins 3mhenrique@gmail.com
@@ -25,7 +25,7 @@ amarelo="\033[01;33m"
 gerarsenha(){
 
 echo "$verde Informe a QUANTIDADE de caracteres para a ser gerada: $fecha"
-read max
+read -r max
 
 case $max in
   ''|*[!0-9]*) echo "$vermelho Insira apenas números referente ao TAMANHO da senha a ser gerada $fecha" >&2
@@ -34,19 +34,19 @@ case $max in
 $amarelo 1 - Senha apenas números $fecha
 $amarelo 2 - Senha com LeTrAs e números $fecha
 $amarelo 3 - Senha com LeTrAs, números e caracteres especiais $fecha"
-read tipo
-	echo $tipo
-	case $tipo in
+read -r tipo
+	echo "$tipo"
+	case "$tipo" in
 		''|*[!0-9]*) echo "$vermelho Insira apenas números referente ao TIPO da senha a ser gerada $fecha" >&2
 		exit 1;;
 		1) echo "$vermelho Senha gerada: $amarelo"
-			</dev/urandom tr -dc '0-9' | head -c $max  ; echo "$fecha"
+			</dev/urandom tr -dc '0-9' | head -c "$max"  ; echo "$fecha"
 			;;
 		2) echo "$vermelho Senha gerada: $amarelo"
-			</dev/urandom tr -dc 'A-Za-z0-9' | head -c $max  ; echo "$fecha" 
+			</dev/urandom tr -dc 'A-Za-z0-9' | head -c "$max"  ; echo "$fecha" 
 			;;
 		3) echo "$vermelho Senha gerada: $amarelo"
-			</dev/urandom tr -dc 'A-Za-z0-9!"#$%&'\''()*+,-./:;<=>?@[\]^_{|}~' | head -c $max  ; echo "$fecha" 
+			</dev/urandom tr -dc 'A-Za-z0-9!"#$%&'\''()*+,-./:;<=>?@[\]^_{|}~' | head -c "$max"  ; echo "$fecha" 
     ;;
 	esac
 esac
@@ -54,12 +54,20 @@ esac
 #----------FIM-FUNCOES--------------------------------------------------------|
 
 case "$1" in
-  -h | --help ) echo "Programa para gerar passwords com complexida alfanumérica e com caracteres especiais rapidamente via terminal"
-               echo "Autor mateuscomh vulgo Django"
+  -h | --help ) echo "$verde Programa para gerar passwords com complexidade
+    alfanumérica e com caracteres especiais rapidamente via terminal $fecha"
+               echo "$verde Autor mateuscomh vulgo Django $fecha"
                exit 0 ;;
-  -v | --version ) echo "Versão 1.2"
+  -v | --version ) echo "$verde Versão 1.2 $fecha"
                   exit 0 ;;
- '') gerarsenha 
+ '') gerarsenha
+     echo "$verde Deseja gerar nova senha [y/n]? $fecha"
+     read -r escolha 
+     while [ $escolha != "n" ]; do
+       gerarsenha
+      echo "$verde Deseja gerar nova senha [y/n]? $fecha"
+      read -r escolha 
+     done
   ;;
   *) echo "$vermelho Opção inválida $fecha"
       exit 1 ;;
