@@ -62,7 +62,7 @@ case "$1" in
   -v | --version ) echo "$verde Versão 1.5 $fecha"
                   exit 0 ;;
  '') OP=s 
-  while [ "$OP" = "s" ]; do
+  while [ "$OP" = "s" ] || [ "$OP" = "S" ]; do
       case $OP in 
       	s|S) _gerarsenha 
               read -p "Deseja gerar nova senha? [s/n]"  OP ;;
