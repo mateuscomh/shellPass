@@ -61,15 +61,16 @@ case "$1" in
                exit 0 ;;
   -v | --version ) echo "$verde Versão 1.5 $fecha"
                   exit 0 ;;
- '') OP=s 
-  while [ "$OP" = "s" ] || [ "$OP" = "S" ]; do
-      case $OP in 
-      	s|S) _gerarsenha 
-              read -p "Deseja gerar nova senha? [s/n]"  OP ;;
-      	n|N) break ;;
-      	*) read -p "$amarelo Informar [s/n] para gerar nova senha $fecha" OP ;;
-      esac
-  done;; 
-  *) echo "$vermelho Opção inválida, não é necessário parâmetros $fecha" 
-     exit 1 ;;
+ '') OP=s
+    while true; do
+      if [ "$OP" = "s" ] ||[ "$OP" = "S" ]; then
+        _gerarsenha
+         read -p "Deseja gerar nova senha? [s/n]"  OP 
+      elif [ "$OP" = n ] || [ "$OP" = "N" ]; then
+        exit 0
+      else 
+        echo "$vermelho Opção inválida, não é necessário parâmetros $fecha" 
+        exit 10
+      fi
+    done
 esac
