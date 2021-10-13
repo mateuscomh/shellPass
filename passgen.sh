@@ -38,7 +38,6 @@ $amarelo 1 - Senha apenas números $fecha
 $amarelo 2 - Senha com LeTrAs e números $fecha
 $amarelo 3 - Senha com LeTrAs, números e caracteres especiais $fecha"
 read -r tipo
-	echo "$tipo"
 	case "$tipo" in
 		''|*[!0-9]*) echo "$vermelho Insira apenas números referente ao TIPO da senha a ser gerada $fecha" >&2
 		exit 1;;
@@ -46,8 +45,7 @@ read -r tipo
 			</dev/urandom tr -dc '0-9' | head -c "$max"  ; echo "$fecha"
 			;;
 		2) echo "$vermelho Senha gerada: $amarelo"
-			</dev/urandom tr -dc 'A-Za-z0-9' | head -c "$max"  ; echo "$fecha" 
-			;;
+			</dev/urandom tr -dc 'A-Za-z0-9' | head -c "$max"  ; echo "$fecha" ;;
 		3) echo "$vermelho Senha gerada: $amarelo"
 			</dev/urandom tr -dc 'A-Za-z0-9!"#$%&'\''()*+,-./:;<=>?@[\]^_{|}~' | head -c "$max" ; echo "$fecha" ;;
         *) echo "$vermelho Utilizar as opcoes [1,2,3] $fecha" ;;
