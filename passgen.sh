@@ -49,8 +49,7 @@ read -r tipo
 			</dev/urandom tr -dc 'A-Za-z0-9' | head -c "$max"  ; echo "$fecha" 
 			;;
 		3) echo "$vermelho Senha gerada: $amarelo"
-			</dev/urandom tr -dc 'A-Za-z0-9!"#$%&'\''()*+,-./:;<=>?@[\]^_{|}~' |
-              head -c "$max" ; echo "$fecha" ;;
+			</dev/urandom tr -dc 'A-Za-z0-9!"#$%&'\''()*+,-./:;<=>?@[\]^_{|}~' | head -c "$max" ; echo "$fecha" ;;
         *) echo "$vermelho Utilizar as opcoes [1,2,3] $fecha" ;;
 	esac
 esac
