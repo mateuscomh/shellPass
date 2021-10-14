@@ -18,7 +18,8 @@
 #                  - Atualizado no repositorio GIT e renomeado para fácil acesso
 # 12/10/2021 18:00 - Adicionado looping de novas senhas
 # 13/10/2021 19:00 - Alterado código para funcionamento em bash
-#
+# 14/10/2021 09:00 - Adicionada compatibilidade com MacOS
+
 #----------FIM-HEADER---------------------------------------------------------|
 fecha='\033[m'
 verde='\033[32;1m'
@@ -33,7 +34,7 @@ read -r max
 
 case $max in
   ''|*[!0-9]*) echo -e "${vermelho} Insira apenas números referente ao TAMANHO da senha a ser gerada ${fecha}" >&2
-  exit 1;;
+      return 1;;
   [0-9]*) echo -e "${verde} Informe o TIPO da complexidade de senha que deseja: ${fecha}
 ${amarelo} 1 - Senha apenas números ${fecha}
 ${amarelo} 2 - Senha com LeTrAs e números ${fecha}
@@ -41,15 +42,16 @@ ${amarelo} 3 - Senha com LeTrAs, números e caracteres especiais ${fecha}"
 read -r tipo
 	case "$tipo" in
 		''|*[!0-9]*) echo -e "${vermelho} Insira apenas números referente ao TIPO da senha a ser gerada ${fecha}" >&2
-		exit 1;;
+		return 2;;
 		1) echo -e "${vermelho} Senha gerada: ${amarelo}"
-			</dev/urandom tr -dc '0-9' | head -c "$max"  ; echo -e "${fecha}"
+			</dev/urandom LC_ALL=C tr -dc '0-9' | head -c "$max"  ; echo -e "${fecha}"
 			;;
 		2) echo -e "${vermelho} Senha gerada: ${amarelo}"
-			</dev/urandom tr -dc 'A-Za-z0-9' | head -c "$max"  ; echo -e "${fecha}" ;;
+			</dev/urandom LC_ALL=C tr -dc 'A-Za-z0-9' | head -c "$max"  ; echo -e "${fecha}" ;;
 		3) echo -e "${vermelho} Senha gerada: ${amarelo}"
-			</dev/urandom tr -dc 'A-Za-z0-9!"#$%&'\''()*+,-./:;<=>?@[\]^_{|}~' | head -c "$max" ; echo -e "${fecha}" ;;
-        *) echo -e "${vermelho} Utilizar as opcoes [1,2,3] ${fecha}" ;;
+			</dev/urandom LC_ALL=C tr -dc 'A-Za-z0-9!"#$%&'\''()*+,-./:;<=>?@[\]^_{|}~' | head -c "$max" ; echo -e "${fecha}" ;;
+        *) echo -e "${vermelho} Utilizar as opcoes [4,2,3] ${fecha}"
+        return 1 ;;
 	esac
 esac
 }
@@ -75,5 +77,5 @@ case "$1" in
       fi
     done ;;
   *) echo -e "${vermelho} Não é necessário parâmetro inicial ${fecha}"
-     exit 1;;
+     exit 2;;
 esac
