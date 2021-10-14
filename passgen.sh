@@ -66,7 +66,7 @@ case "$1" in
    while true; do
     if [[ "$OP" = [sS] ]]; then
       _gerarsenha
-        read -p "Deseja gerar nova senha? [s/n]" OP; 
+        read -n 1 -p "Deseja gerar nova senha? [s/n]" OP; echo
      elif [[ "$OP" = [nN] ]]; then
        break
      else 
