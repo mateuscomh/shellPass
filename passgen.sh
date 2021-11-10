@@ -2,22 +2,20 @@
 
 #-----------HEADER-------------------------------------------------------------|
 # AUTOR             : Matheus Martins 3mhenrique@gmail.com
-# HOMEPAGE          : https://github.com/mateuscomh 
+# HOMEPAGE          : https://github.com/mateuscomh/Pass_Gen_Shell
 # DATA CRIAÇÃO      : 29/08/2020 
-# PROGRAMA          : Shell-Base
 # VERSÃO            : 1.7.1
 # LICENÇA           : GPL3
-# PEQUENA-DESCRICÃO : Programa para criar senhas seguras via terminal
-#                   - Utilizar desenvolvido em shell: user SH para execucao com cores
+# PEQUENA-DESCRICÃO : Programa para criar senhas via terminal shell
 
 #----------FIM-HEADER---------------------------------------------------------|
 fecha='\033[m'
 verde='\033[32;1m'
 vermelho='\033[31;1m'
 amarelo='\033[01;33m'
+max=$1
 
 #----------FUNCOES------------------------------------------------------------|
-max=$1
 _gerarsenha(){
 if [ -z "$max" ] || [ "$max" -eq 0 ]; then
   echo -e "${verde} Informe a QUANTIDADE de caracteres para a ser gerada: ${fecha}"
@@ -59,8 +57,8 @@ read -r tipo
   esac
 esac
 }
-#----------FIM-FUNCOES--------------------------------------------------------|
 
+#----------FIM-FUNCOES--------------------------------------------------------|
 case "$max" in
   -h | --help ) 
     echo -e "${verde} Programa para gerar passwords com complexidade
@@ -87,6 +85,4 @@ case "$max" in
     done ;;
   [0-9]*)
     _gerarsenha
-#  *) echo -e "${vermelho} Não é necessário parâmetro inicial ${fecha}"
-#    exit 2;;
 esac
