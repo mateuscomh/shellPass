@@ -27,12 +27,13 @@ case $max in
     echo -e "${vermelho} Insira apenas números referente ao TAMANHO da senha a ser gerada ${fecha}" >&2
     return 1 
     ;;
-  [0-9]*) echo -e "${verde} Informe o TIPO da complexidade de senha que deseja: ${fecha}
-  ${amarelo} 1 - Senha apenas números ${fecha}
-  ${amarelo} 2 - Senha com LeTrAs e números ${fecha}
-  ${amarelo} 3 - Senha com LeTrAs, números e caracteres especiais ${fecha}"
-read -r tipo
-  
+  [0-9]*) 
+    echo -e "${verde} Informe o TIPO da complexidade de senha que deseja: ${fecha}
+    ${amarelo} 1 - Senha apenas números ${fecha}
+    ${amarelo} 2 - Senha com LeTrAs e números ${fecha}
+    ${amarelo} 3 - Senha com LeTrAs, números e caracteres especiais ${fecha}"
+    read -r tipo
+    
   case "$tipo" in
     ''|*[!0-9]*) 
       echo -e "${vermelho} Insira apenas números referente ao TIPO da senha a ser gerada ${fecha}" >&2
@@ -44,8 +45,9 @@ read -r tipo
       ;;
     2)
       echo -e "${vermelho} Senha gerada: ${amarelo}"
-      </dev/urandom LC_ALL=C tr -dc 'A-Za-z0-9' | head -c "$max"  ; echo -e "${fecha}" ;;
-		3)
+      </dev/urandom LC_ALL=C tr -dc 'A-Za-z0-9' | head -c "$max"  ; echo -e "${fecha}"
+      ;;
+    3)
       echo -e "${vermelho} Senha gerada: ${amarelo}"
       </dev/urandom LC_ALL=C tr -dc 'A-Za-z0-9!"#$%&'\''()*+,-./:;<=>?@[\]^_{|}~' | head -c "$max"
       echo -e "${fecha}" 
@@ -68,8 +70,9 @@ case "$max" in
     ;;
   -v | --version ) 
     echo -e "${verde} Versão 1.7 ${fecha}"
-    exit 0 ;;
-  '') 
+    exit 0 
+    ;;
+  '')
     OP=s
     while true; do
       if [[ "$OP" = [sS] ]]; then
@@ -82,7 +85,9 @@ case "$max" in
         echo -e "${vermelho} Opção inválida ${fecha}"
         read -n 1 -p "Deseja gerar nova senha? [s/n]" OP; echo
       fi
-    done ;;
+    done 
+    ;;
   [0-9]*)
     _gerarsenha
+    ;;
 esac
