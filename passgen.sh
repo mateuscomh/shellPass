@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 
 #-----------HEADER-------------------------------------------------------------|
-# AUTOR             : Matheus Martins 3mhenrique@gmail.com
+# AUTOR             : Matheus Martins <3mhenrique@gmail.com>
 # HOMEPAGE          : https://github.com/mateuscomh/Pass_Gen_Shell
-# DATA CRIAÇÃO      : 29/08/2020 
-# VERSÃO            : 1.7.1
+# DATA              : 29/08/2020 
+# VERSÃO            : 1.7.2
 # LICENÇA           : GPL3
 # PEQUENA-DESCRICÃO : Programa para criar senhas via terminal shell
 
@@ -18,13 +18,13 @@ max=$1
 #----------FUNCOES------------------------------------------------------------|
 _gerarsenha(){
 if [ -z "$max" ] || [ "$max" -eq 0 ]; then
-  echo -e "${verde} Informe a QUANTIDADE de caracteres para a ser gerada: ${fecha}"
+  echo -e "${verde} Informe a QUANTIDADE de caracteres para senha: ${fecha}"
   read -r max
 fi
 
 case $max in
   ''|*[!0-9]*) 
-    echo -e "${vermelho} Insira apenas números referente ao TAMANHO da senha a ser gerada ${fecha}" >&2
+    echo -e "${vermelho} Insira apenas números referente ao TAMANHO da senha ${fecha}" 
     return 1 
     ;;
   [0-9]*) 
@@ -36,7 +36,7 @@ case $max in
     
   case "$tipo" in
     ''|*[!0-9]*) 
-      echo -e "${vermelho} Insira apenas números referente ao TIPO da senha a ser gerada ${fecha}" >&2
+      echo -e "${vermelho} Insira apenas números referente ao TIPO da senha ${fecha}" 
       return 2
       ;;
     1)
