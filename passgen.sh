@@ -3,10 +3,10 @@
 #-----------HEADER-------------------------------------------------------------|
 # AUTOR             : Matheus Martins <3mhenrique@gmail.com>
 # HOMEPAGE          : https://github.com/mateuscomh/Pass_Gen_Shell
-# DATA              : 29/08/2020 
-# VERSÃO            : 1.8
+# DATA/VER.         : 29/08/2020 1.8
 # LICENÇA           : GPL3
 # PEQUENA-DESCRICÃO : Programa para criar senhas via terminal shell
+# REQUISITOS        : xclip 
 
 #----------FIM-HEADER---------------------------------------------------------|
 FECHA='\033[m'
