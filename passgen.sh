@@ -8,14 +8,14 @@
 # PEQUENA-DESCRICÃO : Programa para criar senhas via terminal shell
 # REQUISITOS        : xclip 
 
-#----------FIM-HEADER---------------------------------------------------------|
+#----------FIM-HEADER----------------------------------------------------------|
 FECHA='\033[m'
 VERDE='\033[32;1m'
 VERMELHO='\033[31;1m'
 AMARELO='\033[01;33m'
 MAX=$1
 
-#----------FUNCOES------------------------------------------------------------|
+#----------FUNCOES-------------------------------------------------------------|
 _gerarsenha(){
 if [ -z "$MAX" ] || [ "$MAX" -eq 0 ]; then
   echo -e "${VERDE} Informe a QUANTIDADE de caracteres para senha: ${FECHA}"
@@ -24,7 +24,7 @@ fi
 
 case $MAX in
   ''|*[!0-9]*) 
-    echo -e "${VERMELHO} Insira apenas números referente ao TAMANHO da senha ${FECHA}" 
+    echo -e "${VERMELHO} Insira apenas números referente ao TAMANHO da senha ${FECHA}"
     return 1 
     ;;
   [0-9]*) 
@@ -50,7 +50,8 @@ case $MAX in
       echo -e "${VERDE}$PASS${FECHA}"
       ;;
     3)
-      PASS=$(cat /dev/urandom LC_ALL=C | tr -dc 'A-Za-z0-9!"#$%&'\''()*+,-./:;<=>?@[\]^_{|}~' | head -c "$MAX")
+      PASS=$(cat /dev/urandom LC_ALL=C | 
+        tr -dc 'A-Za-z0-9!"#$%&'\''()*+,-./:;<=>?@[\]^_{|}~' | head -c "$MAX")
       echo -n "$PASS" | xclip -sel copy
       echo -e "${VERDE}$PASS${FECHA}"
       ;;
@@ -62,7 +63,7 @@ case $MAX in
 esac
 }
 
-#----------FIM-FUNCOES--------------------------------------------------------|
+#----------FIM-FUNCOES---------------------------------------------------------|
 case "$MAX" in
   -h | --help ) 
     echo -e "${VERDE} Programa para gerar passwords com complexidade
