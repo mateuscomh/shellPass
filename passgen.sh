@@ -2,10 +2,10 @@
 
 #-----------HEADER-------------------------------------------------------------|
 # AUTOR             : Matheus Martins <3mhenrique@gmail.com>
-# HOMEPAGE          : https://github.com/mateuscomh/Pass_Gen_Shell
+# HOMEPAGE          : https://github.com/mateuscomh
 # DATA/VER.         : 29/08/2020 1.8
 # LICENÇA           : GPL3
-# PEQUENA-DESCRICÃO : Programa para criar senhas via terminal shell
+# PEQUENA-DESCRICÃO : Script em shell para criação de senhas
 # REQUISITOS        : xclip 
 
 #----------FIM-HEADER----------------------------------------------------------|
@@ -40,7 +40,7 @@ case $MAX in
       return 2
       ;;
     1)
-      PASS=$(cat /dev/urandom LC_ALL=C |  tr -dc '0-9' | head -c "$MAX")
+      PASS=$(cat /dev/urandom LC_ALL=C | tr -dc '0-9' | head -c "$MAX")
       echo -n "$PASS" | xclip -sel copy
       echo -e "${VERDE}$PASS${FECHA}"
       ;;
