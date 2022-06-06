@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-#-----------HEADER-------------------------------------------------------------|
+#------------------------------------------------------------------------------|
 # AUTOR             : Matheus Martins <3mhenrique@gmail.com>
 # HOMEPAGE          : https://github.com/mateuscomh
 # DATA/VER.         : 29/08/2020 1.9
@@ -8,14 +8,15 @@
 # PEQUENA-DESCRICÃO : Script em shell para criação de senhas
 # REQUISITOS        : xclip
 
-#----------FIM-HEADER----------------------------------------------------------|
+#------------------------------------------------------------------------------|
+export LANG=C
 FECHA='\033[m'
 VERDE='\033[32;1m'
 VERMELHO='\033[31;1m'
 AMARELO='\033[01;33m'
 MAX=$1
-export LANG=C
-#----------FUNCOES-------------------------------------------------------------|
+#----------FUNC-------------------------------------------------------------|
+
 _gerarsenha(){
 if [ -z "$MAX" ] || [ "$MAX" -eq 0 ]; then
   echo -e "${VERDE} Informe a QUANTIDADE de caracteres para senha: ${FECHA}"
@@ -63,8 +64,8 @@ case $MAX in
   esac
 esac
 }
+#----------------------------------------------------------------------------|
 
-#----------FIM-FUNCOES---------------------------------------------------------|
 case "$MAX" in
   -h | --help )
     echo -e "${VERDE} Programa para gerar passwords com complexidade
