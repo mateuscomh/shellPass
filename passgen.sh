@@ -3,7 +3,7 @@
 #-----------HEADER-------------------------------------------------------------|
 # AUTOR             : Matheus Martins <3mhenrique@gmail.com>
 # HOMEPAGE          : https://github.com/mateuscomh
-# DATA/VER.         : 29/08/2020 1.8
+# DATA/VER.         : 29/08/2020 1.9
 # LICENÇA           : GPL3
 # PEQUENA-DESCRICÃO : Script em shell para criação de senhas
 # REQUISITOS        : xclip
@@ -15,7 +15,6 @@ VERMELHO='\033[31;1m'
 AMARELO='\033[01;33m'
 MAX=$1
 export LANG=C
-#export LC_CTYPE=C
 #----------FUNCOES-------------------------------------------------------------|
 _gerarsenha(){
 if [ -z "$MAX" ] || [ "$MAX" -eq 0 ]; then
@@ -58,7 +57,7 @@ case $MAX in
       echo -e "${VERDE}$PASS${FECHA}"
       ;;
     *)
-      echo -e "${VERMELHO} Utilizar as opcoes [4,2,3] ${FECHA}"
+      echo -e "${VERMELHO} Utilizar as opcoes [1,2,3] ${FECHA}"
       return 1
       ;;
   esac
