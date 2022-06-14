@@ -64,6 +64,7 @@ case $MAX in
 esac
 }
 #---------MAIN-------------------------------------------------------------------|
+
 case "$MAX" in
   -h | --help )
     echo -e "${VERDE} Program to generate complex passwords
@@ -76,7 +77,7 @@ case "$MAX" in
     exit 0
     ;;
   '')
-    OP=s
+    OP='Y'
     while true; do
       if [[ "$OP" = [yYsS] ]]; then
         MAX=0
