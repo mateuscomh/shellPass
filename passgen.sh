@@ -3,7 +3,7 @@
 #------------------------------------------------------------------------------|
 # AUTOR             : Matheus Martins <3mhenrique@gmail.com>
 # HOMEPAGE          : https://github.com/mateuscomh
-# DATA/VER.         : 29/08/2020 1.9
+# DATA/VER.         : 29/08/2020 2.0
 # LICENÇA           : GPL3
 # PEQUENA-DESCRICÃO : Script em shell para criação de senhas
 # REQUISITOS        : xclip
@@ -38,10 +38,12 @@ case $MAX in
   case "$TIPO" in
     ''|*[!0-9]*)
       echo -e "${VERMELHO} Insira apenas números referente ao TIPO da senha ${FECHA}"
+
       return 2
       ;;
     1)
       PASS=$(cat /dev/urandom LC_ALL=C | tr -dc '0-9' | head -c "$MAX")
+
       command -v xclip > /dev/null && echo -n "$PASS" | xclip -sel copy || echo -n "$PASS" | pbcopy
       echo -e "${VERDE}$PASS${FECHA}"
       ;;
@@ -65,7 +67,6 @@ case $MAX in
 esac
 }
 #----------------------------------------------------------------------------|
-
 case "$MAX" in
   -h | --help )
     echo -e "${VERDE} Programa para gerar passwords com complexidade

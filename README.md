@@ -1,7 +1,10 @@
-# Gerador de Password em ShellBash
-Aplicação para gerar passwords exclusivos rapidamente via terminal 
+# Passgen on bash
 
-Tipos de senhas geradas
- - Numérica
- - Alfanumérica
- - Alfanumérica + Caracteres especiais
+---
+A fast, simple and powerful open-source utility tool for generating, unique and random passwords. 
+
+Can be used on terminals GNU/Linux and MaCOS iTerm
+
+
+
+**Recommended set alias to be more fast :)**
