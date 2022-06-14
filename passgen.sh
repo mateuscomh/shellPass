@@ -42,19 +42,19 @@ case $MAX in
       ;;
     1)
       PASS=$(cat /dev/urandom LC_ALL=C | tr -dc '0-9' | head -c "$MAX")
-      command -v xclip && echo -n "$PASS" | xclip -sel copy || echo -n "$PASS" | pbcopy
+      command -v xclip > /dev/null && echo -n "$PASS" | xclip -sel copy || echo -n "$PASS" | pbcopy
       echo -e "${VERDE}$PASS${FECHA}"
       ;;
     2)
       PASS=$(cat /dev/urandom LC_ALL=C | tr -dc 'A-Za-z0-9' | head -c "$MAX")
-      command -v xclip && echo -n "$PASS" | xclip -sel copy || echo -n "$PASS" | pbcopy
+      command -v xclip > /dev/null && echo -n "$PASS" | xclip -sel copy || echo -n "$PASS" | pbcopy
       #echo -n "$PASS" | xclip -sel copy
       echo -e "${VERDE}$PASS${FECHA}"
       ;;
     3)
       PASS=$(cat /dev/urandom LC_ALL=C |
         tr -dc 'A-Za-z0-9!"#$%&'\''()*+,-./:;<=>?@[\]^_{|}~' | head -c "$MAX")
-      command -v xclip && echo -n "$PASS" | xclip -sel copy || echo -n "$PASS" | pbcopy
+      command -v xclip > /dev/null && echo -n "$PASS" | xclip -sel copy || echo -n "$PASS" | pbcopy
       echo -e "${VERDE}$PASS${FECHA}"
       ;;
     *)
