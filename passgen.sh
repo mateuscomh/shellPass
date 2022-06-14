@@ -78,15 +78,15 @@ case "$MAX" in
   '')
     OP=s
     while true; do
-      if [[ "$OP" = [sS] ]]; then
+      if [[ "$OP" = [yYsS] ]]; then
         MAX=0
       _gerarsenha
-        read -n 1 -p "Do you want to generate new password? [s/n]" OP; echo
+        read -n 1 -p "Do you want to generate new password? [Y/n]" OP; echo
       elif [[ "$OP" = [nN] ]]; then
         break
       else
         echo -e "${VERMELHO} Invalid option ${FECHA}"
-        read -n 1 -p "Do you want to generate new password? [s/n]" OP; echo
+        read -n 1 -p "Do you want to generate new password? [Y/n]" OP; echo
       fi
     done
     ;;
