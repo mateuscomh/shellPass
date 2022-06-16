@@ -3,7 +3,7 @@
 ---
 A fast, simple and powerful open-source utility tool for generating, unique and random passwords. 
 
-Can be used on terminals GNU/Linux and MaCOS iTerm
+Can be used on terminals GNU/Linux and MaCOS
 
 
 
