@@ -3,7 +3,7 @@
 #------------------------------------------------------------------------------|
 # AUTOR             : Matheus Martins <3mhenrique@gmail.com>
 # HOMEPAGE          : https://github.com/mateuscomh
-# DATA/VER.         : 29/08/2020 2.1
+# DATA/VER.         : 29/08/2020 2.2
 # LICENÇA           : GPL3
 # PEQUENA-DESCRICÃO : Shell Script to generate fast passwords on terminal
 # REQUISITOS        : xclip on GNU/Linux / pbcopy on MacOS
@@ -42,18 +42,18 @@ case $MAX in
       ;;
     1)
       PASS=$(cat /dev/urandom LC_ALL=C | tr -dc '0-9' | head -c "$MAX")
-      command -v xclip > /dev/null && echo -n "$PASS" | xclip -sel copy || echo -n "$PASS" | pbcopy
+      command -v xclip > /dev/null && echo -n "$PASS" | xclip -sel copy || echo -n "$PASS" | pbcopy 2> /dev/null
       echo -e "${VERDE}$PASS${FECHA}"
       ;;
     2)
       PASS=$(cat /dev/urandom LC_ALL=C | tr -dc 'A-Za-z0-9' | head -c "$MAX")
-      command -v xclip > /dev/null && echo -n "$PASS" | xclip -sel copy || echo -n "$PASS" | pbcopy
+      command -v xclip > /dev/null && echo -n "$PASS" | xclip -sel copy || echo -n "$PASS" | pbcopy 2> /dev/null
       echo -e "${VERDE}$PASS${FECHA}"
       ;;
     3)
       PASS=$(cat /dev/urandom LC_ALL=C |
         tr -dc 'A-Za-z0-9!"#$%&'\''()*+,-./:;<=>?@[\]^_{|}~' | head -c "$MAX")
-      command -v xclip > /dev/null && echo -n "$PASS" | xclip -sel copy || echo -n "$PASS" | pbcopy
+      command -v xclip > /dev/null && echo -n "$PASS" | xclip -sel copy || echo -n "$PASS" | pbcopy 2> /dev/null
       echo -e "${VERDE}$PASS${FECHA}"
       ;;
     *)
