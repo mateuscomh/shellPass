@@ -3,7 +3,7 @@
 #------------------------------------------------------------------------------|
 # AUTOR             : Matheus Martins <3mhenrique@gmail.com>
 # HOMEPAGE          : https://github.com/mateuscomh
-# DATA/VER.         : 29/08/2020 2.2
+# DATA/VER.         : 29/08/2020 2.3
 # LICENÇA           : GPL3
 # PEQUENA-DESCRICÃO : Shell Script to generate fast passwords on terminal
 # REQUISITOS        : xclip on GNU/Linux / pbcopy on MacOS
@@ -62,6 +62,9 @@ case $MAX in
       ;;
   esac
 esac
+# write in file
+echo "$(date '+%d/%m/%y %H:%M:%S') - $PASS" >> $(pwd)/history.log
+
 }
 #---------MAIN-------------------------------------------------------------------|
 
