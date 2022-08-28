@@ -18,7 +18,7 @@ MAX=$1
 #----------FUNC-------------------------------------------------------------|
 
 _gerarsenha(){
-if [ -z "$MAX" ] || [ "$MAX" -eq 0 ]; then
+if [ -z "$MAX" ] || [ "$MAX" -gt 0 ]; then
   echo -e "${VERDE} Enter the QUANTITY of characters for the password: ${FECHA}"
   read -r MAX
 fi
@@ -72,11 +72,11 @@ case "$MAX" in
   -h | --help )
     echo -e "${VERDE} Program to generate complex passwords
       alphanumeric and with special characters quickly via terminal ${FECHA}"
-    echo -e "${VERDE} Author mateuscomh vulgo Django ${FECHA}"
+    echo -e "${VERDE} Author mateuscomh ${FECHA}"
     exit 0
     ;;
   -v | --version )
-    echo -e "${VERDE} Versão 2.1 ${FECHA}"
+    echo -e "${VERDE} Versão 2.3 ${FECHA}"
     exit 0
     ;;
   '')
