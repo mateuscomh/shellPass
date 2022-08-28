@@ -18,7 +18,7 @@ MAX=$1
 #----------FUNC-------------------------------------------------------------|
 
 _gerarsenha(){
-if [ -z "$MAX" ] || [ "$MAX" -gt 0 ]; then
+if [ -z "$MAX" ] || [ "$MAX" -eq 0 ]; then
   echo -e "${VERDE} Enter the QUANTITY of characters for the password: ${FECHA}"
   read -r MAX
 fi
