@@ -1,4 +1,5 @@
-# Passgen on bash
+# Password generator on shell
+
 ![screenshot.png](https://raw.githubusercontent.com/mateuscomh/shellPasswd/main/screenshot.png)
 ---
 
@@ -13,17 +14,17 @@ Can be used on terminals GNU/Linux and MaCOS
 First clone this repositoty
 
 ```
-git clone https://github.com/mateuscomh/shellPasswd.git && cd shellPasswd
+git clone https://github.com/mateuscomh/shellPass.git && cd shellPass
 ```
 Change permission to execute anytime
 ```
-sudo chmod +x shellPasswd
+sudo chmod +x shellPass
 ```
 and run on yout terminal with number caracter you wanted in a password 
 ```
-./passgen.sh 15
+./shellPass.sh 15
 # or 
-./passgen.sh
+./shellPass.sh
 ```
 
 **Recommended set alias to be more fast :)**
