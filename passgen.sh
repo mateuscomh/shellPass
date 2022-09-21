@@ -3,13 +3,19 @@
 #------------------------------------------------------------------------------|
 # AUTOR             : Matheus Martins <3mhenrique@gmail.com>
 # HOMEPAGE          : https://github.com/mateuscomh
-# DATA/VER.         : 29/08/2020 2.3
-# LICENÇA           : GPL3
-# PEQUENA-DESCRICÃO : Shell Script to generate fast passwords on terminal
-# REQUISITOS        : xclip on GNU/Linux / pbcopy on MacOS
+# DATA/VER.         : 29/08/2020 2.4
+# LICENCE           : GPL3
+# SHORT DESC        : Shell Script to generate fast passwords on terminal
+# REQ               : xclip on GNU/Linux / pbcopy on MacOS
 
 #------------------------------------------------------------------------------|
 export LANG=C
+VERSION='2.4'
+USAGE=$(echo "Program to generate on shell passwords whith alpanum on terminal
+
+░▒█▀▀▀█░█░░░░█▀▀░█░░█░░▄▀▀▄░█▀▀▄░█▀▀░█▀▀
+░░▀▀▀▄▄░█▀▀█░█▀▀░█░░█░░█▄▄█░█▄▄█░▀▀▄░▀▀▄
+░▒█▄▄▄█░▀░░▀░▀▀▀░▀▀░▀▀░█░░░░▀░░▀░▀▀▀░▀▀▀ ")
 FECHA='\033[m'
 VERDE='\033[32;1m'
 VERMELHO='\033[31;1m'
@@ -19,6 +25,8 @@ MAX=$1
 
 _gerarsenha(){
 if [ -z "$MAX" ] || [ "$MAX" -eq 0 ]; then
+  clear
+  echo -e "$USAGE \n"
   echo -e "${VERDE} Enter the QUANTITY of characters for the password: ${FECHA}"
   read -r MAX
 fi
@@ -70,13 +78,11 @@ echo "$(date '+%d/%m/%y %H:%M:%S') - $PASS" >> $(pwd)/history.log
 
 case "$MAX" in
   -h | --help )
-    echo -e "${VERDE} Program to generate complex passwords
-      alphanumeric and with special characters quickly via terminal ${FECHA}"
-    echo -e "${VERDE} Author mateuscomh ${FECHA}"
+    echo -e "${VERDE} $USAGE ${FECHA}"
     exit 0
     ;;
   -v | --version )
-    echo -e "${VERDE} Versão 2.3 ${FECHA}"
+    echo -e "${VERDE} $VERSION ${FECHA}"
     exit 0
     ;;
   '')
