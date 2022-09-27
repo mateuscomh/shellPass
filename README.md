@@ -1,13 +1,16 @@
-# Password generator on shell
-
-![screenshot.png](https://raw.githubusercontent.com/mateuscomh/shellPasswd/main/screenshot.png)
+### Password generator on shell
+```
+░▒█▀▀▀█░█░░░░█▀▀░█░░█░░▄▀▀▄░█▀▀▄░█▀▀░█▀▀
+░░▀▀▀▄▄░█▀▀█░█▀▀░█░░█░░█▄▄█░█▄▄█░▀▀▄░▀▀▄
+░▒█▄▄▄█░▀░░▀░▀▀▀░▀▀░▀▀░█░░░░▀░░▀░▀▀▀░▀▀▀ "
+```
 ---
 
 A fast, simple and powerful open-source utility tool for generating, unique and random passwords. 
 
 Can be used on terminals GNU/Linux and MaCOS
 
-
+![screenshot.png](https://raw.githubusercontent.com/mateuscomh/shellPasswd/main/screenshot.png)
 ---
 ## How install and use?
 
