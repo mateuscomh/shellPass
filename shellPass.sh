@@ -47,7 +47,6 @@ case $MAX in
     ${AMARELO} 3 - Password with LeTtErS, numb3rs and Speci@l Ch@r@ct&rs ${FECHA}";
     read -sn 1 TIPO;
 
-<<<<<<< HEAD:passgen.sh
   case "$TIPO" in
     ''|*[!0-9]*)
       echo -e "${VERMELHO} Enter only numbers referring to the TYPE of the password ${FECHA}"
@@ -59,7 +58,6 @@ case $MAX in
       echo -e "${VERDE}$PASS${FECHA}"
       ;;
     2)
-=======
     case "$TIPO" in
       ''|*[!0-9]*)
         echo -e "${VERMELHO} Enter only numbers referring to the TYPE of the password ${FECHA}"
@@ -71,14 +69,12 @@ case $MAX in
         echo -e "${VERDE}$PASS${FECHA}"
         ;;
       2)
->>>>>>> 3ef8fe0ec1ac169b8349edba621bd1ca576048d2:shellPass.sh
-      PASS=$(cat /dev/urandom LC_ALL=C | tr -dc 'A-Za-z0-9' | head -c "$MAX")
-      command -v xclip > /dev/null && echo -n "$PASS" | xclip -sel copy || echo -n "$PASS" | pbcopy 2> /dev/null
-      echo -e "${VERDE}$PASS${FECHA}"
+        PASS=$(cat /dev/urandom LC_ALL=C | tr -dc 'A-Za-z0-9' | head -c "$MAX")
+        command -v xclip > /dev/null && echo -n "$PASS" | xclip -sel copy || echo -n "$PASS" | pbcopy 2> /dev/null
+        echo -e "${VERDE}$PASS${FECHA}"
       ;;
       3)
-        PASS=$(cat /dev/urandom LC_ALL=C |
-          tr -dc 'A-Za-z0-9!"#$%&'\''()*+,-./:;<=>?@[\]^_{|}~' | head -c "$MAX")
+        PASS=$(cat /dev/urandom LC_ALL=C | tr -dc 'A-Za-z0-9!"#$%&'\''()*+,-./:;<=>?@[\]^_{|}~' | head -c "$MAX")
         command -v xclip > /dev/null && echo -n "$PASS" | xclip -sel copy || echo -n "$PASS" | pbcopy 2> /dev/null
         echo -e "${VERDE}$PASS${FECHA}"
         ;;
@@ -88,12 +84,10 @@ case $MAX in
         ;;
     esac
 esac
-# write in file
+# write in local file
 echo "$(date '+%d/%m/%y %H:%M:%S') - $PASS" >> $(pwd)/history.log
-
 }
 #---------MAIN-------------------------------------------------------------------|
-
 case "$MAX" in
   h | -h | --help )
     echo -e "$USAGE"
