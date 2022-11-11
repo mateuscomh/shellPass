@@ -12,7 +12,6 @@
 export LANG=C
 VERSION='2.4 by Matheus Martins'
 USAGE="Program to generate on shell passwords whith alpanum on terminal
-
 ░▒█▀▀▀█░█░░░░█▀▀░█░░█░░▄▀▀▄░█▀▀▄░█▀▀░█▀▀
 ░░▀▀▀▄▄░█▀▀█░█▀▀░█░░█░░█▄▄█░█▄▄█░▀▀▄░▀▀▄
 ░▒█▄▄▄█░▀░░▀░▀▀▀░▀▀░▀▀░█░░░░▀░░▀░▀▀▀░▀▀▀ "
@@ -27,7 +26,7 @@ _gerarsenha(){
 if [ -z "$MAX" ] || [ "$MAX" -eq 0 ]; then
   clear
   echo -e "$USAGE \n"
-  echo -e "${VERDE} Enter the QUANTITY of characters for the password: ${FECHA}"
+  echo -e "${VERDE} Enter the QUANTITY of characters for the password or [Q] to quit: ${FECHA}"
   read -r MAX
 fi
 
@@ -47,17 +46,6 @@ case $MAX in
     ${AMARELO} 3 - Password with LeTtErS, numb3rs and Speci@l Ch@r@ct&rs ${FECHA}";
     read -sn 1 TIPO;
 
-  case "$TIPO" in
-    ''|*[!0-9]*)
-      echo -e "${VERMELHO} Enter only numbers referring to the TYPE of the password ${FECHA}"
-      return 1
-      ;;
-    1)
-      PASS=$(cat /dev/urandom LC_ALL=C | tr -dc '0-9' | head -c "$MAX")
-      command -v xclip > /dev/null && echo -n "$PASS" | xclip -sel copy || echo -n "$PASS" | pbcopy 2> /dev/null
-      echo -e "${VERDE}$PASS${FECHA}"
-      ;;
-    2)
     case "$TIPO" in
       ''|*[!0-9]*)
         echo -e "${VERMELHO} Enter only numbers referring to the TYPE of the password ${FECHA}"
@@ -69,12 +57,13 @@ case $MAX in
         echo -e "${VERDE}$PASS${FECHA}"
         ;;
       2)
-        PASS=$(cat /dev/urandom LC_ALL=C | tr -dc 'A-Za-z0-9' | head -c "$MAX")
-        command -v xclip > /dev/null && echo -n "$PASS" | xclip -sel copy || echo -n "$PASS" | pbcopy 2> /dev/null
-        echo -e "${VERDE}$PASS${FECHA}"
+      PASS=$(cat /dev/urandom LC_ALL=C | tr -dc 'A-Za-z0-9' | head -c "$MAX")
+      command -v xclip > /dev/null && echo -n "$PASS" | xclip -sel copy || echo -n "$PASS" | pbcopy 2> /dev/null
+      echo -e "${VERDE}$PASS${FECHA}"
       ;;
       3)
-        PASS=$(cat /dev/urandom LC_ALL=C | tr -dc 'A-Za-z0-9!"#$%&'\''()*+,-./:;<=>?@[\]^_{|}~' | head -c "$MAX")
+        PASS=$(cat /dev/urandom LC_ALL=C |
+          tr -dc 'A-Za-z0-9!"#$%&'\''()*+,-./:;<=>?@[\]^_{|}~' | head -c "$MAX")
         command -v xclip > /dev/null && echo -n "$PASS" | xclip -sel copy || echo -n "$PASS" | pbcopy 2> /dev/null
         echo -e "${VERDE}$PASS${FECHA}"
         ;;
@@ -84,10 +73,12 @@ case $MAX in
         ;;
     esac
 esac
-# write in local file
+# write in file
 echo "$(date '+%d/%m/%y %H:%M:%S') - $PASS" >> $(pwd)/history.log
+
 }
 #---------MAIN-------------------------------------------------------------------|
+
 case "$MAX" in
   h | -h | --help )
     echo -e "$USAGE"
