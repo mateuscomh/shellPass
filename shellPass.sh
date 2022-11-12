@@ -3,14 +3,14 @@
 #------------------------------------------------------------------------------|
 # AUTOR             : Matheus Martins <3mhenrique@gmail.com>
 # HOMEPAGE          : https://github.com/mateuscomh/shellPass
-# DATE/VER.         : 29/08/2020 2.4
+# DATE/VER.         : 29/08/2020 2.6
 # LICENCE           : GPL3
 # SHORT DESC        : Shell Script to generate fast passwords on terminal
 # DEPS              : xclip on GNU/Linux / pbcopy on MacOS
 
 #------------------------------------------------------------------------------|
 export LANG=C
-VERSION='2.4 by Matheus Martins'
+VERSION='2.6 by Matheus Martins'
 USAGE="Program to generate on shell passwords whith alpanum on terminal
 ░▒█▀▀▀█░█░░░░█▀▀░█░░█░░▄▀▀▄░█▀▀▄░█▀▀░█▀▀
 ░░▀▀▀▄▄░█▀▀█░█▀▀░█░░█░░█▄▄█░█▄▄█░▀▀▄░▀▀▄
@@ -74,8 +74,11 @@ case $MAX in
     esac
 esac
 # write in file
-echo "$(date '+%d/%m/%y %H:%M:%S') - $PASS" >> $(pwd)/history.log
+echo "$(date '+%d/%m/%y %H:%M:%S') - $PASS" >> /gitclones/shellPass/history.log
 
+}
+_askprint(){
+  read -rn 1 -p "[R]epeat, generate new password [Y/N] or [Q]uit program? [Y/N/R/Q]" OP; echo
 }
 #---------MAIN-------------------------------------------------------------------|
 
@@ -94,15 +97,15 @@ case "$MAX" in
       if [[ "$OP" = [yYsS] ]]; then
         MAX=0
       _gerarsenha
-        read -n 1 -p "Do you want to [R]epeat or generate new password? [Y/N/R]" OP; echo
+      _askprint
       elif [[ "$OP" = [rR] ]]; then
         _gerarsenha
-        read -n 1 -p "Do you want to [R]epeat or generate new password? [Y/N/R]" OP; echo
-      elif [[ "$OP" = [nN] ]]; then
+        _askprint
+      elif [[ "$OP" = [nNqQ] ]]; then
         break
       else
         echo -e "${VERMELHO} Invalid option ${FECHA}"
-        read -n 1 -p "Do you want to [R]epeat or generate new password? [Y/N/R]" OP; echo
+        _askprint
       fi
     done
     ;;
