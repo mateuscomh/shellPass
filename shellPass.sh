@@ -121,4 +121,7 @@ case "$MAX" in
   [0-9]*)
     _makepass
     ;;
+  *[!0-9]*)
+    echo -e "${BOLD} Invalid option, call again. ${FECHA}" && exit 1 
+    ;;
 esac
