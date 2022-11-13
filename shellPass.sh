@@ -51,7 +51,7 @@ case $MAX in
 
     case "$TIPO" in
       q|Q)
-        echo -e "Bye.."
+        echo -e "Bye.." && exit 0
         ;;
       ''|*[!0-9]*)
         echo -e "${BLINK} Enter only numbers referring to the TYPE of the password ${FECHA}"
