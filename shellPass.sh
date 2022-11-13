@@ -11,7 +11,7 @@
 #------------------------------------------------------------------------------|
 export LANG=C
 VERSION='2.6 by Matheus Martins'
-USAGE="Program to generate on shell passwords whith alpanum on terminal
+USAGE="Program to generate on shell unique and secure passwords direct from terminal
 ░▒█▀▀▀█░█░░░░█▀▀░█░░█░░▄▀▀▄░█▀▀▄░█▀▀░█▀▀
 ░░▀▀▀▄▄░█▀▀█░█▀▀░█░░█░░█▄▄█░█▄▄█░▀▀▄░▀▀▄
 ░▒█▄▄▄█░▀░░▀░▀▀▀░▀▀░▀▀░█░░░░▀░░▀░▀▀▀░▀▀▀ "
