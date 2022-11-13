@@ -24,10 +24,10 @@ MAX=$1
 clear
 _getsize(){
 while [[ -z "$MAX" || $MAX == *[^[:digit:]]* || $MAX == 0 ]];  do
+  clear
   echo -e "$USAGE \n"
   echo -e "${BOLD} Enter the QUANTITY of characters for the password or [Q] to quit: ${FECHA}"
   read -r MAX
-  clear
   [[ $MAX == [qQ] ]] && exit 0
 done
 return 0
@@ -80,9 +80,11 @@ case $MAX in
     esac
 esac
 # write in file
-echo "$(date '+%d/%m/%y %H:%M:%S') - $PASS" >> /gitclones/shellPass/history.log
-
+SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+echo "Script location is $SCRIPT_DIR"
+echo "$(date '+%d/%m/%y %H:%M:%S') - $PASS" >> $SCRIPTDIR/shellPassHistory.log
 }
+
 _askprint(){
   read -rn 1 -p "[R]epeat, generate new password [Y/N] or [Q]uit program? [Y/N/R/Q]" OP; echo
 }
