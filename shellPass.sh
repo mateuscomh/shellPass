@@ -3,15 +3,15 @@
 #------------------------------------------------------------------------------|
 # AUTOR             : Matheus Martins <3mhenrique@gmail.com>
 # HOMEPAGE          : https://github.com/mateuscomh/shellPass
-# DATE/VER.         : 29/08/2020 2.6
+# DATE/VER.         : 29/08/2020 2.7
 # LICENCE           : GPL3
 # SHORT DESC        : Shell Script to generate fast passwords on terminal
-# DEPS              : xclip on GNU/Linux / pbcopy on MacOS
+# DEPS              : xclip in GNU/Linux / pbcopy in MacOS
 
 #------------------------------------------------------------------------------|
 export LANG=C
-VERSION='2.6 by Matheus Martins'
-USAGE="Program to generate on shell random passwords direct from terminal
+VERSION='2.7 by Matheus Martins'
+USAGE="Program to generate on shell random passwords
 ░▒█▀▀▀█░█░░░░█▀▀░█░░█░░▄▀▀▄░█▀▀▄░█▀▀░█▀▀
 ░░▀▀▀▄▄░█▀▀█░█▀▀░█░░█░░█▄▄█░█▄▄█░▀▀▄░▀▀▄
 ░▒█▄▄▄█░▀░░▀░▀▀▀░▀▀░▀▀░█░░░░▀░░▀░▀▀▀░▀▀▀ "
