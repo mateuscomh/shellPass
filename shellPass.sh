@@ -11,7 +11,7 @@
 #------------------------------------------------------------------------------|
 export LANG=C
 VERSION='2.6 by Matheus Martins'
-USAGE="Program to generate on shell unique, random and secure passwords direct from terminal
+USAGE="Program to generate on shell random passwords direct from terminal
 ░▒█▀▀▀█░█░░░░█▀▀░█░░█░░▄▀▀▄░█▀▀▄░█▀▀░█▀▀
 ░░▀▀▀▄▄░█▀▀█░█▀▀░█░░█░░█▄▄█░█▄▄█░▀▀▄░▀▀▄
 ░▒█▄▄▄█░▀░░▀░▀▀▀░▀▀░▀▀░█░░░░▀░░▀░▀▀▀░▀▀▀ "
@@ -23,10 +23,12 @@ MAX=$1
 #----------FUNC-------------------------------------------------------------|
 clear
 _getsize(){
+clear
 while [[ -z "$MAX" || $MAX == *[^[:digit:]]* || $MAX == 0 ]];  do
   echo -e "$USAGE \n"
   echo -e "${BOLD} Enter the QUANTITY of characters for the password or [Q] to quit: ${FECHA}"
   read -r MAX
+  [[ $MAX == [qQ] ]] && exit 0
 done
 return 0
 }
