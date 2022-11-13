@@ -45,6 +45,9 @@ case $MAX in
     read -rsn 1 TIPO;
 
     case "$TIPO" in
+      q|Q)
+        echo -e "Bye.."
+        ;;
       ''|*[!0-9]*)
         echo -e "${BLINK} Enter only numbers referring to the TYPE of the password ${FECHA}"
         return 2
@@ -102,6 +105,7 @@ case "$MAX" in
         _gerarsenha
         _askprint
       elif [[ "$OP" = [nNqQ] ]]; then
+        echo -e "bye.."
         break
       else
         echo -e "${BLINK} Invalid option ${FECHA}"
