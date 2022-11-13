@@ -81,8 +81,7 @@ case $MAX in
 esac
 # write in file
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
-touch $SCRIPTDIR/history.log
-echo "$(date '+%d/%m/%y %H:%M:%S') - $PASS" >> $SCRIPTDIR/history.log
+echo "$(date '+%d/%m/%y %H:%M:%S') - $PASS" >> $SCRIPTDIR/history.log &> /dev/null
 }
 
 _askprint(){
