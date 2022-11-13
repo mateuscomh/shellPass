@@ -22,12 +22,12 @@ ITALIC=$(tput dim)
 MAX=$1
 #----------FUNC-------------------------------------------------------------|
 clear
-_gettamanho(){
+_getsize(){
   echo -e "$USAGE \n"
   echo -e "${BOLD} Enter the QUANTITY of characters for the password or [Q] to quit: ${FECHA}"
   read -r MAX
 }
-_gerarsenha(){
+_makepass(){
 case $MAX in
   q|Q)
     echo -e "Quiting..."
@@ -35,7 +35,7 @@ case $MAX in
     ;;
   ''|*[!0-9]*)
     echo -e "${BLINK} Invalid option. ${FECHA}"
-    _gettamanho
+    _getsize
     ;;
   [0-9]*)
     echo -e "${BOLD} Enter the TYPE of password complexity you want: ${FECHA}
@@ -97,12 +97,12 @@ case "$MAX" in
     while true; do
       if [[ "$OP" = [yYsS] ]]; then
         MAX=0
-      _gettamanho
-      _gerarsenha
+      _getsize
+      _makepass
       _askprint
       elif [[ "$OP" = [rR] ]]; then
-        _gettamanho
-        _gerarsenha
+        _getsize
+        _makepass
         _askprint
       elif [[ "$OP" = [nNqQ] ]]; then
         echo -e "bye.."
@@ -114,6 +114,6 @@ case "$MAX" in
     done
     ;;
   [0-9]*)
-    _gerarsenha
+    _makepass
     ;;
 esac
