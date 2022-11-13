@@ -81,8 +81,8 @@ case $MAX in
 esac
 _writeinfile
 }
+
 _writeinfile(){
-  # write in file
 SCRIPT_PATH="${BASH_SOURCE:-$0}"
 ABS_SCRIPT_PATH="$(realpath "${SCRIPT_PATH}")"
 ABS_DIRECTORY="$(dirname "${ABS_SCRIPT_PATH}")"
