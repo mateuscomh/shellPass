@@ -23,11 +23,11 @@ MAX=$1
 #----------FUNC-------------------------------------------------------------|
 clear
 _getsize(){
-clear
 while [[ -z "$MAX" || $MAX == *[^[:digit:]]* || $MAX == 0 ]];  do
   echo -e "$USAGE \n"
   echo -e "${BOLD} Enter the QUANTITY of characters for the password or [Q] to quit: ${FECHA}"
   read -r MAX
+  clear
   [[ $MAX == [qQ] ]] && exit 0
 done
 return 0
