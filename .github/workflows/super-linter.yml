@@ -28,7 +28,6 @@ jobs:
           DEFAULT_BRANCH: "main"
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-    steps:
       - name: Checkout code
         uses: actions/checkout@v1
       - name: Run ShellCheck
