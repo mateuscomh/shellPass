@@ -2,18 +2,13 @@
 [![Build Status](https://github.com/mateuscomh/shellPass/actions/workflows/super-linter.yml/badge.svg)](https://github.com/mateuscomh/shellPass/actions/workflows/super-linter.yml)
 
 ### Password generator on shell
-```
-░▒█▀▀▀█░█░░░░█▀▀░█░░█░░▄▀▀▄░█▀▀▄░█▀▀░█▀▀
-░░▀▀▀▄▄░█▀▀█░█▀▀░█░░█░░█▄▄█░█▄▄█░▀▀▄░▀▀▄
-░▒█▄▄▄█░▀░░▀░▀▀▀░▀▀░▀▀░█░░░░▀░░▀░▀▀▀░▀▀▀ "
-```
 ---
 
 A fast, simple and powerful open-source utility tool for generating, unique and random passwords. 
 
 Can be used on terminals GNU/Linux and MaCOS
 
-![screenshot.png](https://raw.githubusercontent.com/mateuscomh/shellPasswd/main/screenshot.png)
+![screenshot.png](https://github.com/mateuscomh/shellPass/blob/main/screenshot.png)
 ---
 ## How install and use?
 
