@@ -1,4 +1,4 @@
-[![Release](https://img.shields.io/badge/release-1.0-brightgreen)](https://github.com/mateuscomh/shellPass/releases)
+[![Release](https://img.shields.io/badge/release-2.7-brightgreen)](https://github.com/mateuscomh/shellPass/releases)
 [![Build Status](https://github.com/mateuscomh/shellPass/actions/workflows/super-linter.yml/badge.svg)](https://github.com/mateuscomh/shellPass/actions/workflows/super-linter.yml)
 
 ### Password generator on shell
