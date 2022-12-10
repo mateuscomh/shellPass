@@ -12,12 +12,9 @@
 export LANG=C
 VERSION='2.7 by Matheus Martins'
 USAGE="Program to generate on shell random passwords
-███████╗██╗  ██╗██████╗ ██╗     ██╗     ██████╗  █████╗ ▄▄███▄▄·▄▄███▄▄·
-██╔════╝██║  ██║╚════██╗██║     ██║     ██╔══██╗██╔══██╗██╔════╝██╔════╝
-███████╗███████║ █████╔╝██║     ██║     ██████╔╝███████║███████╗███████╗
-╚════██║██╔══██║ ╚═══██╗██║     ██║     ██╔═══╝ ██╔══██║╚════██║╚════██║
-███████║██║  ██║██████╔╝███████╗███████╗██║     ██║  ██║███████║███████║
-╚══════╝╚═╝  ╚═╝╚═════╝ ╚══════╝╚══════╝╚═╝     ╚═╝  ╚═╝╚═▀▀▀══╝╚═▀▀▀══╝ "
+░▒█▀▀▀█░█░░░░█▀▀░█░░█░░▄▀▀▄░█▀▀▄░█▀▀░█▀▀
+░░▀▀▀▄▄░█▀▀█░█▀▀░█░░█░░█▄▄█░█▄▄█░▀▀▄░▀▀▄
+░▒█▄▄▄█░▀░░▀░▀▀▀░▀▀░▀▀░█░░░░▀░░▀░▀▀▀░▀▀▀ "
 FECHA='\033[m'
 BOLD=$(tput bold)
 BLINK=$(tput blink)
@@ -25,7 +22,7 @@ ITALIC=$(tput dim)
 MAX=$1
 #----------FUNC-------------------------------------------------------------|
 clear
-_getsize() {
+_getsize(){
   while [[ -z "$MAX" || $MAX == *[^[:digit:]]* || $MAX == 0 ]];  do
     echo -e "$USAGE \n"
     echo -e "${BOLD} Enter the QUANTITY of characters for the password or [Q] to quit: ${FECHA}"
@@ -34,7 +31,7 @@ _getsize() {
   done
   return 0
 }
-_makepass() {
+_makepass(){
   case $MAX in
     q | Q)
       echo -e "Quiting..."
@@ -84,14 +81,14 @@ _makepass() {
   _writeinfile
 }
 
-_writeinfile() {
+_writeinfile(){
   SCRIPT_PATH="${BASH_SOURCE:-$0}"
   ABS_SCRIPT_PATH="$(realpath "${SCRIPT_PATH}")"
   ABS_DIRECTORY="$(dirname "${ABS_SCRIPT_PATH}")"
   echo "$(date '+%d/%m/%y %H:%M:%S') - $PASS" >> "$ABS_DIRECTORY"/history.log 
 }
 
-_askprint() {
+_askprint(){
   read -rn 1 -p "[R]epeat, generate new password [Y/N] or [Q]uit program? [Y/N/R/Q]" OP; echo
 }
 #---------MAIN--------------------------------------------------------------|
