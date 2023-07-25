@@ -18,7 +18,7 @@ fi
 
 # Testando a geração de senhas com letras e números
 output=$(bash shellPass.sh 12 <<< "2")
-if [[ $output =~ ^[A-Za-z0-9]{12}$ ]]; then
+if echo "$output" | grep -Eq '^[A-Za-z0-9]{12}$'; then
   echo "Teste de geração de senha com letras e números passou."
 else
   echo "Teste de geração de senha com letras e números falhou."
@@ -26,7 +26,7 @@ fi
 
 # Testando a geração de senhas com letras, números e caracteres especiais
 output=$(bash shellPass.sh 16 <<< "3")
-if [[ $output =~ ^[A-Za-z0-9!"#$%&'()*+,-./:;<=>?@[\]^_{|}~]{16}$ ]]; then
+if echo "$output" | grep -Eq '^[A-Za-z0-9!"#$%&'"'"'()*+,-./:;<=>?@[\]^_{|}~]{16}$'; then
   echo "Teste de geração de senha com letras, números e caracteres especiais passou."
 else
   echo "Teste de geração de senha com letras, números e caracteres especiais falhou."
