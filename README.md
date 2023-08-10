@@ -34,24 +34,24 @@ Follow the steps below to install and start using shellPass:
    
 2. Grant execution permission to the script:
 
-```bash
-chmod +x shellPass.sh
-```
+   ```bash
+   chmod +x shellPass.sh
+   ```
 
 3. Run the script in the terminal, specifying the desired number of characters for the password:
 
-```bash
-./shellPass.sh 15
-# or simply
-./shellPass.sh
-```
+   ```bash
+   ./shellPass.sh 15
+   # or simply
+   ./shellPass.sh
+   ```
 
 * Recommendation: Create an alias to expedite the process! *
 
-  Contribution
+## Contribution
 Contributions to this project are welcome. If you have any suggestions, bug fixes, or improvements, feel free to open an issue or submit a pull request.
 
-License
+## License
 This project is licensed under the GPL-3.0 License. See the [LICENSE](https://github.com/mateuscomh/shellPass/blob/main/LICENSE) file for more details.
 
 Made with ❤️ by [Matheus Martins](https://www.linkedin.com/in/matheushsmartins)
