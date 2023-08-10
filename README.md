@@ -1,6 +1,6 @@
 # shellPass - Shell Script Password Generator
 
-[![Release](https://img.shields.io/badge/release-2.7-brightgreen)](https://github.com/mateuscomh/shellPass/releases)
+[![Release](https://img.shields.io/badge/release-2.8-brightgreen)](https://github.com/mateuscomh/shellPass/releases)
 [![Build Status](https://github.com/mateuscomh/shellPass/actions/workflows/super-linter.yml/badge.svg)](https://github.com/mateuscomh/shellPass/actions/workflows/super-linter.yml)
 
 ## Overview
