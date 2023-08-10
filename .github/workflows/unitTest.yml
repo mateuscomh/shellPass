@@ -17,7 +17,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Set permissions for the script
-        run: chmod +x unitTest.sh
+        run: chmod +x files/unitTest.sh
 
       - name: Run tests
-        run: ./unitTest.sh
+        run: . files/unitTest.sh

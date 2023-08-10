@@ -10,7 +10,7 @@ shellPass is a fast, simple, and powerful open-source utility tool designed for 
 The program offers options to customize both the length and complexity of generated passwords. It utilizes the special `/dev/random` folder to ensure the generation of secure and unique passwords.
 
 
-![Screenshot](https://github.com/mateuscomh/shellPass/blob/main/screenshot.png)
+![Screenshot](https://github.com/mateuscomh/shellPass/blob/main/files/screenshot.png)
 
 ## Motivation
 
