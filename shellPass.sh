@@ -25,7 +25,7 @@ clear
 _getsize(){
   while [[ -z "$MAX" || $MAX == *[^[:digit:]]* || $MAX == 0 ]];  do
     echo -e "$USAGE \n"
-    echo -e "${BOLD} Enter the QUANTITY of characters for the password or [Q] to quit: ${FECHA}"
+    echo -e "${BOLD} Enter the QUANTITY of characters for the password or [Q]uit: ${FECHA}"
     read -r MAX
     [[ $MAX == [qQ] ]] && echo "bye.." && exit 0
   done
