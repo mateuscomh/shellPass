@@ -62,18 +62,18 @@ _makepass(){
           ;;
         1)
           PASS=$(cat /dev/urandom LC_ALL=C | tr -dc '0-9' | head -c "$MAX")
-          command -v xclip > /dev/null && printf "$PASS" | xclip -sel copy || printf "$PASS" | pbcopy 2> /dev/null
+          command -v xclip > /dev/null & printf %s "$PASS" | xclip -sel copy || printf %s "$PASS" | pbcopy 2> /dev/null
           echo -e "${BOLD}$PASS${FECHA}"
           ;;
         2)
         PASS=$(cat /dev/urandom LC_ALL=C | tr -dc 'A-Za-z0-9' | head -c "$MAX")
-        command -v xclip > /dev/null && printf "$PASS" | xclip -sel copy || printf "$PASS" | pbcopy 2> /dev/null
+        command -v xclip > /dev/null & printf %s "$PASS" | xclip -sel copy || printf %s "$PASS" | pbcopy 2> /dev/null
         echo -e "${BOLD}$PASS${FECHA}"
         ;;
         3)
           PASS=$(cat /dev/urandom LC_ALL=C |
             tr -dc 'A-Za-z0-9!"#$%&'\''()*+,-./:;<=>?@[\]^_{|}~' | head -c "$MAX")
-          command -v xclip > /dev/null && printf "$PASS" | xclip -sel copy || printf "$PASS" | pbcopy 2> /dev/null
+          command -v xclip > /dev/null & printf %s "$PASS" | xclip -sel copy || printf %s "$PASS" | pbcopy 2> /dev/null
           echo -e "${BOLD}$PASS${FECHA}"
           ;;
         *)
