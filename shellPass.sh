@@ -46,7 +46,7 @@ _makepass(){
       _getsize
       ;;
     [0-9]*)
-      if [[ -z "$TIPO" || ! "$TIPO" =~ ^[1-3]$ ]]; then
+      if [[ -z "$TIPO" || "$TIPO" = ^[1-3]$ ]]; then
         echo -e "${BOLD} Enter the TYPE of password complexity you want: ${FECHA}
         ${ITALIC} 1 - Password only numbers ${FECHA}
         ${ITALIC} 2 - Password with LeTtErS and numb3rs ${FECHA}
