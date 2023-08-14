@@ -3,18 +3,22 @@
 #---------------------------------------------------------------------------|
 # AUTOR             : Matheus Martins <3mhenrique@gmail.com>
 # HOMEPAGE          : https://github.com/mateuscomh/shellPass
-# DATE/VER.         : 29/08/2020 2.8
+# DATE/VER.         : 29/08/2020 2.9.1
 # LICENCE           : GPL3
 # SHORT DESC        : Shell Script to generate fast passwords on terminal
 # DEPS              : xclip in GNU/Linux / pbcopy in MacOS
 
 #---------------------------------------------------------------------------|
 export LANG=C
-VERSION="2.7 by Matheus Martins"
+VERSION="2.9.1 by Matheus Martins"
 USAGE="Program to generate on shell random passwords
-░▒█▀▀▀█░█░░░░█▀▀░█░░█░░▄▀▀▄░█▀▀▄░█▀▀░█▀▀
-░░▀▀▀▄▄░█▀▀█░█▀▀░█░░█░░█▄▄█░█▄▄█░▀▀▄░▀▀▄
-░▒█▄▄▄█░▀░░▀░▀▀▀░▀▀░▀▀░█░░░░▀░░▀░▀▀▀░▀▀▀ "
+
+███████╗██╗  ██╗███████╗██╗     ██╗     ██████╗  █████╗ ▄▄███▄▄·▄▄███▄▄·
+██╔════╝██║  ██║██╔════╝██║     ██║     ██╔══██╗██╔══██╗██╔════╝██╔════╝
+███████╗███████║█████╗  ██║     ██║     ██████╔╝███████║███████╗███████╗
+╚════██║██╔══██║██╔══╝  ██║     ██║     ██╔═══╝ ██╔══██║╚════██║╚════██║
+███████║██║  ██║███████╗███████╗███████╗██║     ██║  ██║███████║███████║
+╚══════╝╚═╝  ╚═╝╚══════╝╚══════╝╚══════╝╚═╝     ╚═╝  ╚═╝╚═▀▀▀══╝╚═▀▀▀══╝"
 FECHA="\033[m"
 BOLD=$(tput bold)
 BLINK=$(tput blink)
@@ -22,9 +26,9 @@ ITALIC=$(tput dim)
 MAX=$1
 #----------FUNC-------------------------------------------------------------|
 clear
+echo -e "$USAGE \n"
 _getsize(){
-  while [[ -z "$MAX" || $MAX == *[^[:digit:]]* || $MAX == 0 ]];  do
-    echo -e "$USAGE \n"
+  while [[ -z "$MAX" || "$MAX" == *[^[:digit:]]* || "$MAX" -eq 0 ]];  do
     echo -e "${BOLD} Enter the QUANTITY of characters for the password or [Q]uit: ${FECHA}"
     read -r MAX
     [[ $MAX == [qQ] ]] && echo "bye.." && exit 0
