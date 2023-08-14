@@ -3,15 +3,14 @@
 #---------------------------------------------------------------------------|
 # AUTOR             : Matheus Martins <3mhenrique@gmail.com>
 # HOMEPAGE          : https://github.com/mateuscomh/shellPass
-# DATE/VER.         : 29/08/2020 2.9.1
+# DATE/VER.         : 29/08/2020 2.9.2
 # LICENCE           : GPL3
 # SHORT DESC        : Shell Script to generate fast passwords on terminal
 # DEPS              : xclip in GNU/Linux / pbcopy in MacOS
-
 #---------------------------------------------------------------------------|
 export LANG=C
-VERSION="2.9.1 by Matheus Martins"
-USAGE="Program to generate on shell random passwords
+VERSION="2.9.2 by Matheus Martins"
+USAGE="Program to generate random passwords on CLI
 
 ███████╗██╗  ██╗███████╗██╗     ██╗     ██████╗  █████╗ ▄▄███▄▄·▄▄███▄▄·
 ██╔════╝██║  ██║██╔════╝██║     ██║     ██╔══██╗██╔══██╗██╔════╝██╔════╝
@@ -23,7 +22,8 @@ FECHA="\033[m"
 BOLD=$(tput bold)
 BLINK=$(tput blink)
 ITALIC=$(tput dim)
-MAX=$1
+MAX="$1"
+TIPO="$2"
 #----------FUNC-------------------------------------------------------------|
 clear
 echo -e "$USAGE \n"
@@ -46,12 +46,13 @@ _makepass(){
       _getsize
       ;;
     [0-9]*)
-      echo -e "${BOLD} Enter the TYPE of password complexity you want: ${FECHA}
-      ${ITALIC} 1 - Password only numbers ${FECHA}
-      ${ITALIC} 2 - Password with LeTtErS and numb3rs ${FECHA}
-      ${ITALIC} 3 - Password with LeTtErS, numb3rs and Speci@l Ch@r@ct&rs ${FECHA}";
-      read -rsn 1 TIPO;
-
+      if [[ -z "$TIPO" || ! "$TIPO" =~ ^[1-3]$ ]]; then
+        echo -e "${BOLD} Enter the TYPE of password complexity you want: ${FECHA}
+        ${ITALIC} 1 - Password only numbers ${FECHA}
+        ${ITALIC} 2 - Password with LeTtErS and numb3rs ${FECHA}
+        ${ITALIC} 3 - Password with LeTtErS, numb3rs and Speci@l Ch@r@ct&rs ${FECHA}";
+        read -rsn 1 TIPO;
+      fi
       case "$TIPO" in
         q | Q)
           echo -e "Bye.." && exit 0
