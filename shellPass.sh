@@ -3,7 +3,7 @@ export LANG=C
 #---------------------------------------------------------------------------|
 # AUTOR             : Matheus Martins <3mhenrique@gmail.com>
 # HOMEPAGE          : https://github.com/mateuscomh/shellPass
-# DATE/VER.         : 29/08/2020 3.0
+# DATE/VER.         : 29/08/2020 3.1
 # LICENCE           : GPL3
 # SHORT DESC        : Shell Script to generate fast passwords on terminal
 # DEPS              : xclip in GNU/Linux / pbcopy in MacOS
@@ -13,7 +13,7 @@ BOLD=$(tput bold)
 ITALIC=$(tput dim)
 
 main(){
-  local VERSION="3.0 by Matheus Martins"
+  local VERSION="3.1 by Matheus Martins"
   local USAGE="Program to generate random passwords on CLI
 ███████╗██╗  ██╗███████╗██╗     ██╗     ██████╗  █████╗ ▄▄███▄▄·▄▄███▄▄·
 ██╔════╝██║  ██║██╔════╝██║     ██║     ██╔══██╗██╔══██╗██╔════╝██╔════╝
@@ -70,7 +70,7 @@ _writeinfile(){
 
 _makePass(){
   PASS=$(cat /dev/urandom LC_ALL=C | tr -dc "$CPX"| head -c "$MAX")
-  command -v xclip > /dev/null & printf %s "$PASS" | xclip -sel copy || printf %s "$PASS" | pbcopy 2> /dev/null
+  command -v xclip > /dev/null && { printf %s "$PASS" | xclip -sel copy; } || printf %s "$PASS" | pbcopy 2> /dev/null
   echo -e "${BOLD}$PASS${FECHA}"
 }
 #---Main
