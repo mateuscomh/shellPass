@@ -68,9 +68,13 @@ _writeinfile(){
   echo "$(date '+%d/%m/%y %H:%M:%S') - $PASS" >> "$ABS_DIRECTORY"/history.log 
 }
 
-_makePass(){
+_makePass(){ 
   PASS=$(cat /dev/urandom LC_ALL=C | tr -dc "$CPX"| head -c "$MAX")
-  command -v xclip > /dev/null && { printf %s "$PASS" | xclip -sel copy; } || printf %s "$PASS" | pbcopy 2> /dev/null
+  case $(uname -s) in
+    Darwin) printf %s "$PASS" | pbcopy 2> /dev/null ;;
+    Linux) command -v xclip > /dev/null && { printf %s "$PASS" | xclip -sel copy; } ;;
+    *) echo "This is compatible only for GNU/Linux, MacOS or WSL2"; exit 1 ;;
+  esac
   echo -e "${BOLD}$PASS${FECHA}"
 }
 #---Main

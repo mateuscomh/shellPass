@@ -1,11 +1,11 @@
 # shellPass - Shell Script Password Generator
 
-[![Release](https://img.shields.io/badge/release-3.0-brightgreen)](https://github.com/mateuscomh/shellPass/releases)
+[![Release](https://img.shields.io/badge/release-3.1-brightgreen)](https://github.com/mateuscomh/shellPass/releases)
 [![Build Status](https://github.com/mateuscomh/shellPass/actions/workflows/super-linter.yml/badge.svg)](https://github.com/mateuscomh/shellPass/actions/workflows/super-linter.yml)
 
 ## Overview
 
-shellPass is a fast, simple, and powerful open-source utility tool designed for generating unique and random passwords in the terminal. This script was authored by me and is compatible with macOS, GNU/Linux, and WSL2 environments.
+shellPass is a fast, simple, and powerful open-source utility tool designed for generating unique and random passwords in the terminal. This script was authored by me and is compatible with MacOS, GNU/Linux, and WSL2 environments.
 
 The program offers options to customize both the length and complexity of generated passwords. It utilizes the special `/dev/random` folder to ensure the generation of secure and unique passwords.
 
