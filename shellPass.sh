@@ -13,19 +13,18 @@ BOLD=$(tput bold)
 ITALIC=$(tput dim)
 
 main(){
-  local VERSION="3.1 by Matheus Martins"
+  local VERSION="Ver:3.1 by Matheus Martins"
   local USAGE="Program to generate random passwords on CLI
 ███████╗██╗  ██╗███████╗██╗     ██╗     ██████╗  █████╗ ▄▄███▄▄·▄▄███▄▄·
 ██╔════╝██║  ██║██╔════╝██║     ██║     ██╔══██╗██╔══██╗██╔════╝██╔════╝
 ███████╗███████║█████╗  ██║     ██║     ██████╔╝███████║███████╗███████╗
 ╚════██║██╔══██║██╔══╝  ██║     ██║     ██╔═══╝ ██╔══██║╚════██║╚════██║
 ███████║██║  ██║███████╗███████╗███████╗██║     ██║  ██║███████║███████║
-╚══════╝╚═╝  ╚═╝╚══════╝╚══════╝╚══════╝╚═╝     ╚═╝  ╚═╝╚═▀▀▀══╝╚═▀▀▀══╝"
+╚══════╝╚═╝  ╚═╝╚══════╝╚══════╝╚══════╝╚═╝     ╚═╝  ╚═╝╚═▀▀▀══╝╚═▀▀▀══╝ "
   local MAX="$1"
   local TIPO="$2"
   echo -e "$USAGE"
   case "$MAX" in
-    h | -h | --help ) echo -e "$USAGE"; exit;;
     v | -v | --version )  echo -e "${BOLD} $VERSION ${FECHA}"; exit;;
     * ) _checkSize; _checkType ;;
   esac
