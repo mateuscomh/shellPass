@@ -1,13 +1,14 @@
 #!/usr/bin/env bash
 export LANG=C
-#---------------------------------------------------------------------------|
-# AUTOR             : Matheus Martins <3mhenrique@gmail.com>
-# HOMEPAGE          : https://github.com/mateuscomh/shellPass
-# DATE/VER.         : 29/08/2020 3.1
-# LICENCE           : GPL3
-# SHORT DESC        : Shell Script to generate fast passwords on terminal
-# DEPS              : xclip in GNU/Linux / pbcopy in MacOS
-#---------------------------------------------------------------------------|
+
+#----------------------------------------------------|
+#  Matheus Martins 3mhenrique@gmail.com
+#  https://github.com/mateuscomh/yoURL
+#  30/03/2021 3.1 GPL3
+#  Generate secure passwords on terminal
+#  Depends: xclip on GNU/Linux / pbcopy on IOS
+#----------------------------------------------------|
+
 FECHA="\033[m"
 BOLD=$(tput bold)
 ITALIC=$(tput dim)
