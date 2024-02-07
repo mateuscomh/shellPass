@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 export LANG=C
-
 #----------------------------------------------------|
 #  Matheus Martins 3mhenrique@gmail.com
 #  https://github.com/mateuscomh/yoURL
