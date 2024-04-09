@@ -12,7 +12,7 @@ FECHA="\033[m"
 BOLD=$(tput bold)
 ITALIC=$(tput dim)
 
-main(){
+main() {
   local VERSION="Ver:3.1 by Matheus Martins"
   local USAGE="Program to generate random passwords on CLI
 ███████╗██╗  ██╗███████╗██╗     ██╗     ██████╗  █████╗ ▄▄███▄▄·▄▄███▄▄·
@@ -42,15 +42,15 @@ main(){
   _writeinfile
 }
 
-_checkSize(){
-  while [[ -z "$MAX" || "$MAX" == *[^[:digit:]]* || "$MAX" -eq 0 ]];  do
+_checkSize() {
+  while [[ -z "$MAX" || "$MAX" == *[^[:digit:]]* || "$MAX" -lt 1 ]];  do
     echo -e "${BOLD} Enter the QUANTITY of characters for the password or [Q]uit: ${FECHA}"
     read -r MAX
     [[ $MAX == [qQ] ]] && echo "Bye..." && exit 0
   done
 }
 
-_checkType(){
+_checkType() {
   while [[ "$TIPO" != [1-3] && "$TIPO" != [qQ] ]]; do
     echo -e "${BOLD} Enter the TYPE of password complexity you want: ${FECHA}
     ${ITALIC} 1 - Password only numbers ${FECHA}
@@ -60,14 +60,14 @@ _checkType(){
   done
 }
 
-_writeinfile(){
+_writeinfile() {
   SCRIPT_PATH="${BASH_SOURCE:-$0}"
   ABS_SCRIPT_PATH="$(readlink -f "${SCRIPT_PATH}")"
   ABS_DIRECTORY="$(dirname "${ABS_SCRIPT_PATH}")"
   echo "$(date '+%d/%m/%y %H:%M:%S') - $PASS" >> "$ABS_DIRECTORY"/history.log 
 }
 
-_makePass(){ 
+_makePass() {
   PASS=$(cat /dev/urandom LC_ALL=C | tr -dc "$CPX"| head -c "$MAX")
   case $(uname -s) in
     Darwin) printf %s "$PASS" | pbcopy 2> /dev/null ;;
