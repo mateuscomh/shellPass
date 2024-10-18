@@ -56,7 +56,7 @@ _checkType() {
     echo -e "${BOLD} Enter the TYPE of password complexity you want: ${FECHA}
     ${ITALIC} 1 - Password only numbers ${FECHA}
     ${ITALIC} 2 - Password with LeTtErS and numb3rs ${FECHA}
-    ${ITALIC} 3 - Password with LeTtErS, numb3rs and Speci@l Ch@r@ct&rs ${FECHA}"
+    ${ITALIC} 3 - Password with LeTtErS, numb3rs and Sp3c1@l Ch@r@ct&rs ${FECHA}"
     read -rsn 1 TIPO;
   done
 }
