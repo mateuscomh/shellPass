@@ -4,7 +4,7 @@ export LANG=C
 #----------------------------------------------------|
 #  Matheus Martins 3mhenrique@gmail.com
 #  https://github.com/mateuscomh/yoURL
-#  30/03/2021 3.1 GPL3
+#  30/03/2021 3.2.0 GPL3
 #  Generate secure passwords on terminal
 #  Depends: xclip on GNU/Linux / pbcopy on IOS
 #----------------------------------------------------|
@@ -14,7 +14,8 @@ BOLD=$(tput bold)
 ITALIC=$(tput dim)
 
 main() {
-  local VERSION="Ver:3.1 by Matheus Martins"
+  local VERSION="Ver:3.2.1"
+  local AUTHOR="Matheus Martins-3mhenrique@gmail.com"
   local USAGE="Program to generate random passwords on CLI
 ███████╗██╗  ██╗███████╗██╗     ██╗     ██████╗  █████╗ ▄▄███▄▄·▄▄███▄▄·
 ██╔════╝██║  ██║██╔════╝██║     ██║     ██╔══██╗██╔══██╗██╔════╝██╔════╝
@@ -26,8 +27,8 @@ main() {
   local TIPO="$2"
   echo -e "$USAGE"
   case "$MAX" in
-    v | -v | --version )  echo -e "${BOLD} $VERSION ${FECHA}"; exit;;
-    * ) _checkSize; _checkType ;;
+    v | -v | --version )  echo -e "${BOLD} $VERSION / $AUTHOR ${FECHA}"; return;;
+    * ) echo "$VERSION"; _checkSize; _checkType ;;
   esac
 
   case "$TIPO" in
@@ -53,7 +54,7 @@ _checkSize() {
 
 _checkType() {
   while [[ "$TIPO" != [1-3] && "$TIPO" != [qQ] ]]; do
-    echo -e "${BOLD} Enter the TYPE of password complexity you want: ${FECHA}
+    echo -e "${BOLD} Enter the TYPE [1,2,3] for password complexity you want or [Q]uit ${FECHA}
     ${ITALIC} 1 - Password only numbers ${FECHA}
     ${ITALIC} 2 - Password with LeTtErS and numb3rs ${FECHA}
     ${ITALIC} 3 - Password with LeTtErS, numb3rs and Sp3c1@l Ch@r@ct&rs ${FECHA}"
