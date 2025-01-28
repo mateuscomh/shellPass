@@ -14,7 +14,7 @@ BOLD=$(tput bold)
 ITALIC=$(tput dim)
 
 main() {
-  local VERSION="Ver:3.2.2"
+  local VERSION="Ver:3.2.3"
   local AUTHOR="Matheus Martins-3mhenrique@gmail.com"
   local USAGE="Generate random passwords from CLI
 ███████╗██╗  ██╗███████╗██╗     ██╗     ██████╗  █████╗ ▄▄███▄▄·▄▄███▄▄·
@@ -28,7 +28,7 @@ main() {
   echo -e "$USAGE"
   case "$MAX" in
     v | -v | --version )  echo -e "${BOLD} $VERSION / $AUTHOR ${FECHA}"; return;;
-    * ) echo "$VERSION"; _checkSize; _checkType ;;
+    * ) echo "$VERSION" "$AUTHOR"; _checkSize; _checkType ;;
   esac
 
   case "$TIPO" in
