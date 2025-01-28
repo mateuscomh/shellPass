@@ -14,9 +14,9 @@ BOLD=$(tput bold)
 ITALIC=$(tput dim)
 
 main() {
-  local VERSION="Ver:3.2.1"
+  local VERSION="Ver:3.2.2"
   local AUTHOR="Matheus Martins-3mhenrique@gmail.com"
-  local USAGE="Program to generate random passwords on CLI
+  local USAGE="Generate random passwords from CLI
 ███████╗██╗  ██╗███████╗██╗     ██╗     ██████╗  █████╗ ▄▄███▄▄·▄▄███▄▄·
 ██╔════╝██║  ██║██╔════╝██║     ██║     ██╔══██╗██╔══██╗██╔════╝██╔════╝
 ███████╗███████║█████╗  ██║     ██║     ██████╔╝███████║███████╗███████╗
