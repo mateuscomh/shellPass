@@ -89,11 +89,11 @@ _makePass() {
 	Linux)
 		if grep -iq Microsoft /proc/version; then
 			printf "%s" "$PASS" | clip.exe
-		elif command -v xxclip >/dev/null; then
+		elif command -v xclip >/dev/null; then
 			printf "%s" "$PASS" | xclip -sel clip
 		else
 			echo "$PASS"
-			exit 1
+			exit 125
 		fi
 		;;
 	*)
