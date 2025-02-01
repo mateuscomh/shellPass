@@ -4,7 +4,7 @@ export LANG=C
 #----------------------------------------------------|
 #  Matheus Martins 3mhenrique@gmail.com
 #  https://github.com/mateuscomh/yoURL
-#  30/03/2021 3.2.0 GPL3
+#  30/03/2021 3.4.1 GPL3
 #  Generate secure passwords on terminal
 #  Depends: xclip on GNU/Linux / pbcopy on IOS
 #----------------------------------------------------|
@@ -14,7 +14,7 @@ BOLD=$(tput bold)
 ITALIC=$(tput dim)
 
 main() {
-	local VERSION="Ver:3.3.1"
+	local VERSION="Ver:3.4.1"
 	local AUTHOR="Matheus Martins-3mhenrique@gmail.com"
 	local USAGE="Generate random passwords from CLI
 ███████╗██╗  ██╗███████╗██╗     ██╗     ██████╗  █████╗ ▄▄███▄▄·▄▄███▄▄·
@@ -83,11 +83,19 @@ _writeinfile() {
 }
 
 _makePass() {
-	#	PASS=$(cat /dev/urandom LC_ALL=C | tr -dc "$CPX" | head -c "$MAX")
 	PASS=$(tr -dc "$CPX" </dev/urandom | head -c "$MAX")
 	case $(uname -s) in
 	Darwin) printf %s "$PASS" | pbcopy 2>/dev/null ;;
-	Linux) command -v xclip >/dev/null && { printf %s "$PASS" | xclip -sel copy; } ;;
+	Linux)
+		if grep -iq Microsoft /proc/version; then
+			printf "%s" "$PASS" | clip.exe
+		elif command -v xxclip >/dev/null; then
+			printf "%s" "$PASS" | xclip -sel clip
+		else
+			echo "$PASS"
+			exit 1
+		fi
+		;;
 	*)
 		echo "This is compatible only for GNU/Linux, MacOS or WSL2"
 		exit 1
