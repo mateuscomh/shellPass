@@ -4,7 +4,7 @@ export LANG=C
 #----------------------------------------------------|
 #  Matheus Martins 3mhenrique@gmail.com
 #  https://github.com/mateuscomh/yoURL
-#  30/03/2021 3.5.1 GPL3
+#  30/03/2021 3.6.0 GPL3
 #  Generate secure passwords on terminal
 #  Depends: xclip on GNU/Linux / pbcopy on IOS
 #----------------------------------------------------|
@@ -14,7 +14,7 @@ BOLD=$(tput bold)
 ITALIC=$(tput dim)
 
 main() {
-	local VERSION="Ver:3.5.1"
+	local VERSION="Ver:3.6.0"
 	local AUTHOR="Matheus Martins-3mhenrique@gmail.com"
 	local USAGE="Generate random passwords from CLI
 ███████╗██╗  ██╗███████╗██╗     ██╗     ██████╗  █████╗ ▄▄███▄▄·▄▄███▄▄·
@@ -77,9 +77,10 @@ _checkType() {
 
 _writeinfile() {
 	SCRIPT_PATH="${BASH_SOURCE:-$0}"
-	ABS_SCRIPT_PATH="$(readlink -f "${SCRIPT_PATH}")"
-	ABS_DIRECTORY="$(dirname "${ABS_SCRIPT_PATH}")"
-	echo "$(date '+%d/%m/%y %H:%M:%S') - $PASS" >>"$ABS_DIRECTORY"/history.log
+	AB_SCRIPT_PATH="$(readlink -f "${SCRIPT_PATH}")"
+	AB_DIR="$(dirname "${AB_SCRIPT_PATH}")"
+	[ "$(wc -l < "$AB_DIR/history.log")" -ge 10 ] && sed -i '1d' "$AB_DIR"/history.log
+	echo "$(date '+%d/%m/%y %H:%M:%S') - $PASS" >>"$AB_DIR"/history.log
 }
 
 _makePass() {
