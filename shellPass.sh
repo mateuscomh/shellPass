@@ -14,7 +14,7 @@ BOLD=$(tput bold)
 ITALIC=$(tput dim)
 
 main() {
-	local VERSION="Ver:3.4.1"
+	local VERSION="Ver:3.5.0"
 	local AUTHOR="Matheus Martins-3mhenrique@gmail.com"
 	local USAGE="Generate random passwords from CLI
 ███████╗██╗  ██╗███████╗██╗     ██╗     ██████╗  █████╗ ▄▄███▄▄·▄▄███▄▄·
@@ -83,25 +83,23 @@ _writeinfile() {
 }
 
 _makePass() {
-	PASS=$(tr -dc "$CPX" </dev/urandom | head -c "$MAX")
-	case $(uname -s) in
-	Darwin) printf %s "$PASS" | pbcopy 2>/dev/null ;;
-	Linux)
-		if grep -iq Microsoft /proc/version; then
-			printf "%s" "$PASS" | clip.exe
-		elif command -v xclip >/dev/null; then
-			printf "%s" "$PASS" | xclip -sel clip
-		else
-			echo "$PASS"
-			exit 125
-		fi
-		;;
-	*)
-		echo "This is compatible only for GNU/Linux, MacOS or WSL2"
-		exit 1
-		;;
-	esac
-	echo -e "${BOLD}$PASS${FECHA}"
+	if PASS=$(tr -dc "$CPX" </dev/urandom | head -c "$MAX"); then
+		echo -e "${BOLD}$PASS${FECHA}"
+		case $(uname -s) in
+		Darwin) printf %s "$PASS" | pbcopy 2>/dev/null ;;
+		Linux)
+			if grep -iq Microsoft /proc/version; then
+				printf "%s" "$PASS" | clip.exe
+			elif command -v xclip >/dev/null; then
+				printf "%s" "$PASS" | xclip -sel clip
+			fi
+			;;
+		*)
+			echo "This is compatible only for GNU/Linux, MacOS or WSL2"
+			exit 1
+			;;
+		esac
+	fi
 }
 #---Main
 main "$1" "$2"
