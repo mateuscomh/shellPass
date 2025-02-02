@@ -4,7 +4,7 @@ export LANG=C
 #----------------------------------------------------|
 #  Matheus Martins 3mhenrique@gmail.com
 #  https://github.com/mateuscomh/yoURL
-#  30/03/2021 3.4.1 GPL3
+#  30/03/2021 3.5.1 GPL3
 #  Generate secure passwords on terminal
 #  Depends: xclip on GNU/Linux / pbcopy on IOS
 #----------------------------------------------------|
@@ -14,7 +14,7 @@ BOLD=$(tput bold)
 ITALIC=$(tput dim)
 
 main() {
-	local VERSION="Ver:3.5.0"
+	local VERSION="Ver:3.5.1"
 	local AUTHOR="Matheus Martins-3mhenrique@gmail.com"
 	local USAGE="Generate random passwords from CLI
 ███████╗██╗  ██╗███████╗██╗     ██╗     ██████╗  █████╗ ▄▄███▄▄·▄▄███▄▄·
@@ -90,7 +90,7 @@ _makePass() {
 		Linux)
 			if grep -iq Microsoft /proc/version; then
 				printf "%s" "$PASS" | clip.exe
-			elif command -v xclip >/dev/null; then
+			elif command -v xclip >/dev/null && [ -n "$DISPLAY" ]; then
 				printf "%s" "$PASS" | xclip -sel clip
 			fi
 			;;
