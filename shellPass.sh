@@ -4,7 +4,7 @@ export LANG=C
 #----------------------------------------------------|
 #  Matheus Martins 3mhenrique@gmail.com
 #  https://github.com/mateuscomh/yoURL
-#  30/03/2021 3.6.2 GPL3
+#  30/03/2021 3.6.3 GPL3
 #  Generate secure passwords on terminal
 #  Depends: xclip on GNU/Linux / pbcopy on IOS
 #----------------------------------------------------|
@@ -14,7 +14,7 @@ BOLD=$(tput bold)
 ITALIC=$(tput dim)
 
 main() {
-	local VERSION="Ver:3.6.2"
+	local VERSION="Ver:3.6.3"
 	local AUTHOR="Matheus Martins-3mhenrique@gmail.com"
 	local USAGE="Generate random passwords from CLI
 ███████╗██╗  ██╗███████╗██╗     ██╗     ██████╗  █████╗ ▄▄███▄▄·▄▄███▄▄·
@@ -62,8 +62,8 @@ _checkSize() {
 		echo -e "${BOLD} Enter the QUANTITY of characters for the password or [Q]uit: ${FECHA}"
 		read -r MAX
 		[[ $MAX =~ ^[qQ]$ ]] && echo "Bye..." && exit 0
-    [[ ${#MAX} -gt 9 ]] && echo "Too long! Try less than 9 digits. " && continue
-    break
+		[[ ${#MAX} -gt 9 ]] && echo "Too long! Try less than 9 digits. " && continue
+		break
 	done
 }
 
@@ -81,8 +81,7 @@ _writeinfile() {
 	SCRIPT_PATH="${BASH_SOURCE:-$0}"
 	AB_SCRIPT_PATH="$(readlink -f "${SCRIPT_PATH}")"
 	AB_DIR="$(dirname "${AB_SCRIPT_PATH}")"
-#	[ "$(wc -l < "$AB_DIR/history.log")" -ge 10 ] && sed -i '' -e '1d' "$AB_DIR"/history.log
-	[ "$(wc -l < "$AB_DIR/history.log")" -ge 10 ] && tail -n +2 "$AB_DIR"/history.log > "$AB_DIR"/history.log.tmp && mv "$AB_DIR"/history.log.tmp "$AB_DIR"/history.log
+	[ "$(wc -l <"$AB_DIR/history.log")" -ge 10 ] && tail -n +2 "$AB_DIR"/history.log >"$AB_DIR"/history.log.tmp && mv "$AB_DIR"/history.log.tmp "$AB_DIR"/history.log
 	echo "$(date '+%d/%m/%y %H:%M:%S') - $PASS" >>"$AB_DIR"/history.log
 }
 
