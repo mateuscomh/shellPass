@@ -4,7 +4,7 @@ export LANG=C
 #----------------------------------------------------|
 #  Matheus Martins 3mhenrique@gmail.com
 #  https://github.com/mateuscomh/yoURL
-#  30/03/2021 3.6.1 GPL3
+#  30/03/2021 3.6.2 GPL3
 #  Generate secure passwords on terminal
 #  Depends: xclip on GNU/Linux / pbcopy on IOS
 #----------------------------------------------------|
@@ -14,7 +14,7 @@ BOLD=$(tput bold)
 ITALIC=$(tput dim)
 
 main() {
-	local VERSION="Ver:3.6.1"
+	local VERSION="Ver:3.6.2"
 	local AUTHOR="Matheus Martins-3mhenrique@gmail.com"
 	local USAGE="Generate random passwords from CLI
 ███████╗██╗  ██╗███████╗██╗     ██╗     ██████╗  █████╗ ▄▄███▄▄·▄▄███▄▄·
@@ -58,10 +58,12 @@ main() {
 }
 
 _checkSize() {
-	while [[ -z "$MAX" || "$MAX" == *[^[:digit:]]* || "$MAX" -lt 1 ]]; do
+	while [[ -z "$MAX" || ! "$MAX" =~ ^[1-9][0-9]{0,8}$ ]]; do
 		echo -e "${BOLD} Enter the QUANTITY of characters for the password or [Q]uit: ${FECHA}"
 		read -r MAX
-		[[ $MAX == [qQ] ]] && echo "Bye..." && exit 0
+		[[ $MAX =~ ^[qQ]$ ]] && echo "Bye..." && exit 0
+    [[ ${#MAX} -gt 9 ]] && echo "Too long! Try less than 9 digits. " && continue
+    break
 	done
 }
 
