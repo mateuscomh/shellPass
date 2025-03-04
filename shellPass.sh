@@ -4,7 +4,7 @@ export LANG=C
 #----------------------------------------------------|
 #  Matheus Martins 3mhenrique@gmail.com
 #  https://github.com/mateuscomh/yoURL
-#  30/03/2021 3.6.3 GPL3
+#  30/03/2021 3.7.1 GPL3
 #  Generate secure passwords on terminal
 #  Depends: xclip on GNU/Linux / pbcopy on IOS
 #----------------------------------------------------|
@@ -48,6 +48,17 @@ main() {
 	3)
 		CPX='A-Za-z0-9!"#$%&'\''()*+,-./:;<=>?@[\]^_{|}~'
 		;;
+	4)
+		DICIONARIO="/usr/share/dict/american-english"
+
+		if [ ! -f "$DICIONARIO" ]; then
+			echo "Dicionário não encontrado!"
+			exit 1
+		fi
+		CPX=$(shuf -n "$MAX" "$DICIONARIO" | tr '\n' '-' | sed 's/-$//')
+
+#		CPX=$(awk 'BEGIN {srand()} {print $0}' "$DICIONARIO" | shuf | head -n "$MAX" | tr '\n' '-' | sed 's/-$//')
+		;;
 	q | Q)
 		echo "Bye..."
 		exit
@@ -68,11 +79,12 @@ _checkSize() {
 }
 
 _checkType() {
-	while [[ "$TIPO" != [1-3] && "$TIPO" != [qQ] ]]; do
-		echo -e "${BOLD} Enter the TYPE [1,2,3] for password complexity you want or [Q]uit ${FECHA}
+	while [[ "$TIPO" != [1-4] && "$TIPO" != [qQ] ]]; do
+		echo -e "${BOLD} Enter the TYPE [1,2,3,4] for password complexity you want or [Q]uit ${FECHA}
     ${ITALIC} 1 - Password only numbers ${FECHA}
     ${ITALIC} 2 - Password with LeTtErS and numb3rs ${FECHA}
-    ${ITALIC} 3 - Password with LeTtErS, numb3rs and Sp3c1@l Ch@r@ct&rs ${FECHA}"
+    ${ITALIC} 3 - Password with LeTtErS, numb3rs and Sp3c1@l Ch@r@ct&rs ${FECHA}
+    ${ITALIC} 4 - Random words ${FECHA}"
 		read -rsn 1 TIPO
 	done
 }
@@ -81,12 +93,22 @@ _writeinfile() {
 	SCRIPT_PATH="${BASH_SOURCE:-$0}"
 	AB_SCRIPT_PATH="$(readlink -f "${SCRIPT_PATH}")"
 	AB_DIR="$(dirname "${AB_SCRIPT_PATH}")"
-	[ "$(wc -l <"$AB_DIR/history.log")" -ge 10 ] && tail -n +2 "$AB_DIR"/history.log >"$AB_DIR"/history.log.tmp && mv "$AB_DIR"/history.log.tmp "$AB_DIR"/history.log
-	echo "$(date '+%d/%m/%y %H:%M:%S') - $PASS" >>"$AB_DIR"/history.log
+	HISTORY_FILE="$AB_DIR/history.log"
+
+	tail -n 9 "$HISTORY_FILE" >"$HISTORY_FILE.tmp" 2>/dev/null || touch "$HISTORY_FILE.tmp"
+	mv "$HISTORY_FILE.tmp" "$HISTORY_FILE"
+
+	echo "$(date '+%d/%m/%y %H:%M:%S') - $PASS" >>"$HISTORY_FILE"
+	#[ "$(wc -l <"$AB_DIR/history.log")" -ge 10 ] && tail -n +2 "$AB_DIR"/history.log >"$AB_DIR"/history.log.tmp && mv "$AB_DIR"/history.log.tmp "$AB_DIR"/history.log
+	#echo "$(date '+%d/%m/%y %H:%M:%S') - $PASS" >>"$AB_DIR"/history.log
 }
 
 _makePass() {
-	if PASS=$(tr -dc "$CPX" </dev/urandom | head -c "$MAX"); then
+	if [[ "$TIPO" -eq 4 ]]; then
+		PASS="$CPX"
+	else
+		PASS=$(tr -dc "$CPX" </dev/urandom | head -c "$MAX")
+	fi
 		echo -e "${BOLD}$PASS${FECHA}"
 		case $(uname -s) in
 		Darwin) printf %s "$PASS" | pbcopy 2>/dev/null ;;
@@ -102,7 +124,6 @@ _makePass() {
 			exit 1
 			;;
 		esac
-	fi
 }
 #---Main
 main "$1" "$2"
