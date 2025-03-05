@@ -50,7 +50,7 @@ main() {
 		;;
 	4)
 		case $(uname -s) in
-		Darwin) DICT="/usr/share/dict/web2"  ;;
+		Darwin) DICT="/usr/share/dict/web2" ;;
 		Linux) DICT="/usr/share/dict/american-english" ;;
 		*)
 			echo "This is compatible only for GNU/Linux, MacOS or WSL2"
@@ -111,22 +111,21 @@ _makePass() {
 	else
 		PASS=$(tr -dc "$CPX" </dev/urandom | head -c "$MAX")
 	fi
-		echo -e "${BOLD}$PASS${FECHA}"
-		case $(uname -s) in
-		Darwin) printf %s "$PASS" | pbcopy 2>/dev/null ;;
-		Linux)
-			if grep -iq Microsoft /proc/version; then
-				printf "%s" "$PASS" | clip.exe
-			elif command -v xclip >/dev/null && [ -n "$DISPLAY" ]; then
-				printf "%s" "$PASS" | xclip -sel clip
-			fi
-			;;
-		*)
-			echo "This is compatible only for GNU/Linux, MacOS or WSL2"
-			exit 1
-			;;
-		esac
+	echo -e "${BOLD}$PASS${FECHA}"
+	case $(uname -s) in
+	Darwin) printf %s "$PASS" | pbcopy 2>/dev/null ;;
+	Linux)
+		if grep -iq Microsoft /proc/version; then
+			printf "%s" "$PASS" | clip.exe
+		elif command -v xclip >/dev/null && [ -n "$DISPLAY" ]; then
+			printf "%s" "$PASS" | xclip -sel clip
+		fi
+		;;
+	*)
+		echo "This is compatible only for GNU/Linux, MacOS or WSL2"
+		exit 1
+		;;
+	esac
 }
 #---Main
 main "$1" "$2"
-
