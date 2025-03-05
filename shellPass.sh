@@ -73,7 +73,7 @@ main() {
 }
 
 _checkSize() {
-	while :; do
+	while [[ -z "$MAX" || ! "$MAX" =~ ^[1-9][0-9]{0,8}$ ]]; do
 		echo -e "${BOLD} Enter the QUANTITY of characters for the password or [Q]uit: ${FECHA}"
 		read -r MAX
     [[ $MAX =~ ^[qQ]$ ]] && echo "Bye..." && exit 0
