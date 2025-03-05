@@ -4,17 +4,17 @@ export LANG=C
 #----------------------------------------------------|
 #  Matheus Martins 3mhenrique@gmail.com
 #  https://github.com/mateuscomh/yoURL
-#  30/03/2021 3.7.2 GPL3
+#  30/03/2021 3.7.3 GPL3
 #  Generate secure passwords on terminal
 #  Depends: words; xclip on GNU/Linux / pbcopy on IOS
 #----------------------------------------------------|
 
-FECHA="\033[m"
+FECHA=$(tput sgr0)
 BOLD=$(tput bold)
 ITALIC=$(tput dim)
 
 main() {
-	local VERSION="Ver:3.7.2"
+	local VERSION="Ver:3.7.23"
 	local AUTHOR="Matheus Martins-3mhenrique@gmail.com"
 	local USAGE="Generate random passwords from CLI
 ███████╗██╗  ██╗███████╗██╗     ██╗     ██████╗  █████╗ ▄▄███▄▄·▄▄███▄▄·
@@ -58,7 +58,7 @@ main() {
 			;;
 		esac
 		if [ ! -f "$DICT" ]; then
-			echo "Dicionário não encontrado!"
+			echo "Dictionary not found"
 			exit 1
 		fi
 		CPX=$(shuf -n "$MAX" "$DICT" | tr '\n' '-' | sed 's/-$//')
@@ -73,13 +73,14 @@ main() {
 }
 
 _checkSize() {
-	while [[ -z "$MAX" || ! "$MAX" =~ ^[1-9][0-9]{0,8}$ ]]; do
+	while :; do
 		echo -e "${BOLD} Enter the QUANTITY of characters for the password or [Q]uit: ${FECHA}"
 		read -r MAX
-		[[ $MAX =~ ^[qQ]$ ]] && echo "Bye..." && exit 0
-		[[ ${#MAX} -gt 9 ]] && echo "Too long! Try less than 9 digits. " && continue
-		break
-	done
+    [[ $MAX =~ ^[qQ]$ ]] && echo "Bye..." && exit 0
+    [[ $MAX =~ ^[1-9][0-9]{0,8}$ && ${#MAX} -le 4 ]] && break
+    echo "${ITALIC}Invalid input! Enter up to 4 digits.${FECHA}"
+done
+
 }
 
 _checkType() {
