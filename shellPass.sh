@@ -4,9 +4,9 @@ export LANG=C
 #----------------------------------------------------|
 #  Matheus Martins 3mhenrique@gmail.com
 #  https://github.com/mateuscomh/yoURL
-#  30/03/2021 3.7.1 GPL3
+#  30/03/2021 3.7.2 GPL3
 #  Generate secure passwords on terminal
-#  Depends: xclip on GNU/Linux / pbcopy on IOS
+#  Depends: words; xclip on GNU/Linux / pbcopy on IOS
 #----------------------------------------------------|
 
 FECHA="\033[m"
@@ -14,7 +14,7 @@ BOLD=$(tput bold)
 ITALIC=$(tput dim)
 
 main() {
-	local VERSION="Ver:3.6.3"
+	local VERSION="Ver:3.7.2"
 	local AUTHOR="Matheus Martins-3mhenrique@gmail.com"
 	local USAGE="Generate random passwords from CLI
 ███████╗██╗  ██╗███████╗██╗     ██╗     ██████╗  █████╗ ▄▄███▄▄·▄▄███▄▄·
@@ -49,15 +49,19 @@ main() {
 		CPX='A-Za-z0-9!"#$%&'\''()*+,-./:;<=>?@[\]^_{|}~'
 		;;
 	4)
-		DICIONARIO="/usr/share/dict/american-english"
-
-		if [ ! -f "$DICIONARIO" ]; then
+		case $(uname -s) in
+		Darwin) DICT="/usr/share/dict/web2"  ;;
+		Linux) DICT="/usr/share/dict/american-english" ;;
+		*)
+			echo "This is compatible only for GNU/Linux, MacOS or WSL2"
+			exit 1
+			;;
+		esac
+		if [ ! -f "$DICT" ]; then
 			echo "Dicionário não encontrado!"
 			exit 1
 		fi
-		CPX=$(shuf -n "$MAX" "$DICIONARIO" | tr '\n' '-' | sed 's/-$//')
-
-#		CPX=$(awk 'BEGIN {srand()} {print $0}' "$DICIONARIO" | shuf | head -n "$MAX" | tr '\n' '-' | sed 's/-$//')
+		CPX=$(shuf -n "$MAX" "$DICT" | tr '\n' '-' | sed 's/-$//')
 		;;
 	q | Q)
 		echo "Bye..."
@@ -99,13 +103,11 @@ _writeinfile() {
 	mv "$HISTORY_FILE.tmp" "$HISTORY_FILE"
 
 	echo "$(date '+%d/%m/%y %H:%M:%S') - $PASS" >>"$HISTORY_FILE"
-	#[ "$(wc -l <"$AB_DIR/history.log")" -ge 10 ] && tail -n +2 "$AB_DIR"/history.log >"$AB_DIR"/history.log.tmp && mv "$AB_DIR"/history.log.tmp "$AB_DIR"/history.log
-	#echo "$(date '+%d/%m/%y %H:%M:%S') - $PASS" >>"$AB_DIR"/history.log
 }
 
 _makePass() {
 	if [[ "$TIPO" -eq 4 ]]; then
-		PASS="$CPX"
+		PASS=$(echo "$CPX" | tr '[:upper:]' '[:lower:]' | iconv -f UTF-8 -t ASCII//TRANSLIT | sed "s/'s//g")
 	else
 		PASS=$(tr -dc "$CPX" </dev/urandom | head -c "$MAX")
 	fi
@@ -127,3 +129,4 @@ _makePass() {
 }
 #---Main
 main "$1" "$2"
+
