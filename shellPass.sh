@@ -96,7 +96,8 @@ _checkType() {
     ${ITALIC} 1 - Password only numbers ${FECHA}
     ${ITALIC} 2 - Password with LeTtErS and numb3rs ${FECHA}
     ${ITALIC} 3 - Password with LeTtErS, numb3rs and Sp3c1@l Ch@r@ct&rs ${FECHA}
-    ${ITALIC} 4 - Random words ${FECHA}"
+    ${ITALIC} 4 - Random words ${FECHA}
+${BOLD} Option with up to $MAX characters ${FECHA}"
 		read -rsn 1 TIPO
 	done
 }
