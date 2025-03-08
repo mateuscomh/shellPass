@@ -75,22 +75,23 @@ main() {
 	_makePass
 	_writeinfile
 }
-_checkSize() {
-	while [[ -z "$MAX" || ! "$MAX" =~ ^[1-9][0-9]{0,8}$ || ${#MAX} -gt 4 ]]; do
-		if [[ ${#1} -gt 4 ]]; then
-			echo -e "${ITALIC}Invalid input! The value should not exceed 4 characters.${FECHA}"
-			echo -e "${BOLD} Enter the QUANTITY of characters for the password or [Q]uit: ${FECHA}"
-			read -r MAX
-		else
-			echo -e "${BOLD} Enter the QUANTITY of characters for the password or [Q]uit: ${FECHA}"
-			read -r MAX
-		fi
 
-		if [[ ${#MAX} -gt 4 ]]; then
-			echo "${ITALIC}Invalid input! Enter up to 4 digits.${FECHA}"
-			MAX=""
+_checkSize() {
+	if [[ -n "$1" && "$1" =~ ^[1-9][0-9]{0,3}$ && ${#1} -le 4 ]]; then
+		MAX="$1"
+	fi
+	while true; do
+		echo -e "${BOLD} Enter the number for the password up to 4 digits or [Q]uit: ${FECHA}"
+		read -r MAX
+		if [[ $MAX =~ ^[qQ]$ ]]; then
+			echo "Bye..."
+			exit 0
 		fi
-		[[ $MAX =~ ^[qQ]$ ]] && echo "Bye..." && exit 0
+		if [[ ! "$MAX" =~ ^[0-9]{1,4}$ || "$MAX" -lt 1 || "$MAX" -gt 9999 ]]; then
+			echo -e "${ITALIC}Invalid input! Please enter a number between 1 and 9999${FECHA}"
+			continue
+		fi
+		break
 	done
 }
 
