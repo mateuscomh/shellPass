@@ -4,7 +4,7 @@ export LANG=C
 #----------------------------------------------------|
 #  Matheus Martins 3mhenrique@gmail.com
 #  https://github.com/mateuscomh/yoURL
-#  30/03/2021 3.7.5 GPL3
+#  30/03/2021 3.7.6 GPL3
 #  Generate secure passwords on terminal
 #  Depends: words; xclip on GNU/Linux / pbcopy on IOS
 #----------------------------------------------------|
@@ -14,7 +14,7 @@ BOLD=$(tput bold)
 ITALIC=$(tput dim)
 
 main() {
-	local VERSION="Ver:3.7.5"
+	local VERSION="Ver:3.7.6"
 	local AUTHOR="Matheus Martins-3mhenrique@gmail.com"
 	local USAGE="Generate random passwords from CLI
 ███████╗██╗  ██╗███████╗██╗     ██╗     ██████╗  █████╗ ▄▄███▄▄·▄▄███▄▄·
@@ -27,7 +27,7 @@ main() {
 	local TIPO="$2"
 	echo -e "$USAGE"
 	case "$MAX" in
-	v | -v | h | -h | --version)
+	h | -h | v | -v | --version)
 		echo -e "${ITALIC} $VERSION / $AUTHOR ${FECHA}"
 		return
 		;;
@@ -50,8 +50,12 @@ main() {
 		;;
 	4)
 		case $(uname -s) in
-		Darwin) DICT="/usr/share/dict/web2" ;;
-		Linux) DICT="/usr/share/dict/american-english" ;;
+		Darwin)
+			DICT="/usr/share/dict/web2"
+			;;
+		Linux)
+			DICT="/usr/share/dict/american-english"
+			;;
 		*)
 			echo "This is compatible only for GNU/Linux, MacOS or WSL2"
 			exit 1
@@ -117,7 +121,9 @@ _makePass() {
 	fi
 	echo -e "${BOLD}$PASS${FECHA}"
 	case $(uname -s) in
-	Darwin) printf %s "$PASS" | pbcopy 2>/dev/null ;;
+	Darwin)
+		printf %s "$PASS" | pbcopy 2>/dev/null
+		;;
 	Linux)
 		if grep -iq Microsoft /proc/version; then
 			printf "%s" "$PASS" | clip.exe
