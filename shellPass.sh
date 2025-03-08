@@ -4,7 +4,7 @@ export LANG=C
 #----------------------------------------------------|
 #  Matheus Martins 3mhenrique@gmail.com
 #  https://github.com/mateuscomh/yoURL
-#  30/03/2021 3.7.6 GPL3
+#  30/03/2021 3.8.6 GPL3
 #  Generate secure passwords on terminal
 #  Depends: words; xclip on GNU/Linux / pbcopy on IOS
 #----------------------------------------------------|
@@ -14,7 +14,7 @@ BOLD=$(tput bold)
 ITALIC=$(tput dim)
 
 main() {
-	local VERSION="Ver:3.7.6"
+	local VERSION="Ver:3.8.6"
 	local AUTHOR="Matheus Martins-3mhenrique@gmail.com"
 	local USAGE="Generate random passwords from CLI
 ███████╗██╗  ██╗███████╗██╗     ██╗     ██████╗  █████╗ ▄▄███▄▄·▄▄███▄▄·
@@ -75,19 +75,23 @@ main() {
 	_makePass
 	_writeinfile
 }
-
 _checkSize() {
-	while [[ -z "$MAX" || ! "$MAX" =~ ^[1-9][0-9]{0,8}$ ]]; do
-		echo -e "${BOLD} Enter the QUANTITY of characters for the password or [Q]uit: ${FECHA}"
-		read -r MAX
-		[[ $MAX =~ ^[qQ]$ ]] && echo "Bye..." && exit 0
+	while [[ -z "$MAX" || ! "$MAX" =~ ^[1-9][0-9]{0,8}$ || ${#MAX} -gt 4 ]]; do
+		if [[ ${#1} -gt 4 ]]; then
+			echo -e "${ITALIC}Invalid input! The value should not exceed 4 characters.${FECHA}"
+			echo -e "${BOLD} Enter the QUANTITY of characters for the password or [Q]uit: ${FECHA}"
+			read -r MAX
+		else
+			echo -e "${BOLD} Enter the QUANTITY of characters for the password or [Q]uit: ${FECHA}"
+			read -r MAX
+		fi
+
 		if [[ ${#MAX} -gt 4 ]]; then
 			echo "${ITALIC}Invalid input! Enter up to 4 digits.${FECHA}"
 			MAX=""
-			continue
 		fi
+		[[ $MAX =~ ^[qQ]$ ]] && echo "Bye..." && exit 0
 	done
-
 }
 
 _checkType() {
