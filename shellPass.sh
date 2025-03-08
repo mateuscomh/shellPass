@@ -4,7 +4,7 @@ export LANG=C
 #----------------------------------------------------|
 #  Matheus Martins 3mhenrique@gmail.com
 #  https://github.com/mateuscomh/yoURL
-#  30/03/2021 3.8.7 GPL3
+#  30/03/2021 3.8.1 GPL3
 #  Generate secure passwords on terminal
 #  Depends: words; xclip on GNU/Linux / pbcopy on IOS
 #----------------------------------------------------|
@@ -14,7 +14,7 @@ BOLD=$(tput bold)
 ITALIC=$(tput dim)
 
 main() {
-	local VERSION="Ver:3.8.7"
+	local VERSION="Ver:3.8.1"
 	local AUTHOR="Matheus Martins-3mhenrique@gmail.com"
 	local USAGE="Generate random passwords from CLI
 ███████╗██╗  ██╗███████╗██╗     ██╗     ██████╗  █████╗ ▄▄███▄▄·▄▄███▄▄·
@@ -24,7 +24,7 @@ main() {
 ███████║██║  ██║███████╗███████╗███████╗██║     ██║  ██║███████║███████║
 ╚══════╝╚═╝  ╚═╝╚══════╝╚══════╝╚══════╝╚═╝     ╚═╝  ╚═╝╚═▀▀▀══╝╚═▀▀▀══╝ "
 	local MAX="$1"
-	local TIPO="$2"
+	local TYPE="$2"
 	echo -e "$USAGE"
 	case "$MAX" in
 	h | -h | v | -v | --version)
@@ -38,7 +38,7 @@ main() {
 		;;
 	esac
 
-	case "$TIPO" in
+	case "$TYPE" in
 	1)
 		CPX='0-9'
 		;;
@@ -77,7 +77,7 @@ main() {
 }
 
 _checkSize() {
-	while [[ -z "$MAX" || ! "$MAX" =~ ^[1-9][0-9]{0,8}$ || ${#MAX} -gt 4 ]]; do
+	while [[ -z "$MAX" || ! "$MAX" =~ ^[1-9][0-9]{0,3}$ || ${#MAX} -gt 4 ]]; do
 		if [[ ${#1} -gt 4 ]]; then
 			echo -e "${BOLD} Enter the number for the password up to 4 digits or [Q]uit: ${FECHA}"
 			echo -e "${ITALIC}Invalid input! The value should not exceed 4 characters.${FECHA}"
@@ -86,7 +86,7 @@ _checkSize() {
 			echo -e "${BOLD} Enter the QUANTITY of characters for the password or [Q]uit: ${FECHA}"
 			read -r MAX
 		fi
-
+		TYPE="0"
 		if [[ ${#MAX} -gt 4 ]]; then
 			echo "${ITALIC}Invalid input! Enter up to 4 digits.${FECHA}"
 			MAX=""
@@ -96,14 +96,14 @@ _checkSize() {
 }
 
 _checkType() {
-	while [[ "$TIPO" != [1-4] && "$TIPO" != [qQ] ]]; do
+	while [[ "$TYPE" != [1-4] && "$TYPE" != [qQ] ]]; do
 		echo -e "${BOLD} Enter the TYPE [1,2,3,4] for password complexity you want or [Q]uit ${FECHA}
     ${ITALIC} 1 - Password only numbers ${FECHA}
     ${ITALIC} 2 - Password with LeTtErS and numb3rs ${FECHA}
     ${ITALIC} 3 - Password with LeTtErS, numb3rs and Sp3c1@l Ch@r@ct&rs ${FECHA}
     ${ITALIC} 4 - Random words ${FECHA}
 ${BOLD} Option with up to $MAX characters ${FECHA}"
-		read -rsn 1 TIPO
+		read -rsn 1 TYPE
 	done
 }
 
@@ -120,7 +120,7 @@ _writeinfile() {
 }
 
 _makePass() {
-	if [[ "$TIPO" -eq 4 ]]; then
+	if [[ "$TYPE" -eq 4 ]]; then
 		PASS=$(echo "$CPX" | tr '[:upper:]' '[:lower:]' | iconv -f UTF-8 -t ASCII//TRANSLIT | sed "s/'s//g")
 	else
 		PASS=$(tr -dc "$CPX" </dev/urandom | head -c "$MAX")
