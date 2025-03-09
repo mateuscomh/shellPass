@@ -58,12 +58,12 @@ main() {
 			;;
 		*)
 			echo "This is compatible only for GNU/Linux, MacOS or WSL2"
-			exit 1
+			return 1
 			;;
 		esac
 		if [ ! -f "$DICT" ]; then
 			echo "Dictionary not found, consider install package 'words'"
-			exit 1
+			return 1
 		fi
 		CPX=$(shuf -n "$MAX" "$DICT" | tr '\n' '-' | sed 's/-$//')
 		;;
@@ -95,7 +95,7 @@ _checkSize() {
 }
 
 _checkType() {
-	while [[ "$TYPE" != [1-4] && "$TYPE" != [qQ] ]]; do
+	while ! [[ "$TYPE" =~ ^[1-4]$|^[qQ]$ ]]; do
 		echo -e "${BOLD} Enter the TYPE [1,2,3,4] for password complexity you want or [Q]uit ${FECHA}
     ${ITALIC} 1 - Password only numbers ${FECHA}
     ${ITALIC} 2 - Password with LeTtErS and numb3rs ${FECHA}
@@ -138,7 +138,7 @@ _makePass() {
 		;;
 	*)
 		echo "This is compatible only for GNU/Linux, MacOS or WSL2"
-		exit 1
+		return 1
 		;;
 	esac
 }
