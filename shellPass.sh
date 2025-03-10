@@ -4,7 +4,7 @@ export LANG=C
 #----------------------------------------------------|
 #  Matheus Martins 3mhenrique@gmail.com
 #  https://github.com/mateuscomh/yoURL
-#  30/03/2021 3.8.2 GPL3
+#  30/03/2021 3.8.3 GPL3
 #  Generate secure passwords on terminal
 #  Depends: words; xclip on GNU/Linux / pbcopy on IOS
 #----------------------------------------------------|
@@ -14,7 +14,7 @@ BOLD=$(tput bold)
 ITALIC=$(tput dim)
 
 main() {
-	local VERSION="Ver:3.8.2"
+	local VERSION="Ver:3.8.3"
 	local AUTHOR="Matheus Martins-3mhenrique@gmail.com"
 	local USAGE="Generate random passwords from CLI
 ███████╗██╗  ██╗███████╗██╗     ██╗     ██████╗  █████╗ ▄▄███▄▄·▄▄███▄▄·
@@ -77,7 +77,7 @@ main() {
 }
 
 _checkSize() {
-	while [[ -z "$MAX" || ! "$MAX" =~ ^[1-9][0-9]{1,3}$ || ${#MAX} -gt 4 ]]; do
+	while [[ -z "$MAX" || ! "$MAX" =~ ^[1-9][0-9]{0,3}$ || ${#MAX} -gt 4 ]]; do
 		if [[ ${#MAX} -gt 4 ]]; then
 			echo "${BOLD}  Enter up to 4 digits for the password or [Q]uit.${FECHA}"
 			read -r MAX
