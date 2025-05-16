@@ -4,7 +4,7 @@ export LANG=C
 #----------------------------------------------------|
 #  Matheus Martins 3mhenrique@gmail.com
 #  https://github.com/mateuscomh/yoURL
-#  30/03/2021 3.8.3 GPL3
+#  30/03/2021 3.9.1 GPL3
 #  Generate secure passwords on terminal
 #  Depends: words; xclip on GNU/Linux / pbcopy on IOS
 #----------------------------------------------------|
@@ -14,7 +14,7 @@ BOLD=$(tput bold)
 ITALIC=$(tput dim)
 
 main() {
-	local VERSION="Ver:3.8.3"
+	local VERSION="Ver:3.9.1"
 	local AUTHOR="Matheus Martins-3mhenrique@gmail.com"
 	local USAGE="Generate random passwords from CLI
 ███████╗██╗  ██╗███████╗██╗     ██╗     ██████╗  █████╗ ▄▄███▄▄·▄▄███▄▄·
@@ -122,8 +122,30 @@ _makePass() {
 	if [[ "$TYPE" -eq 4 ]]; then
 		PASS=$(echo "$CPX" | tr '[:upper:]' '[:lower:]' | iconv -f UTF-8 -t ASCII//TRANSLIT | sed "s/'s//g")
 	else
-		PASS=$(tr -dc "$CPX" </dev/urandom | head -c "$MAX")
+		if [[ "$TYPE" -eq 3 && "$MAX" -gt 3 ]]; then
+			lower='a-z'
+			upper='A-Z'
+			numbers='0-9'
+			special='!"#$%&'\''()*+,-./:;<=>?@[\]^_{|}~'
+
+			remaining=$((MAX - 4))
+
+			PASS=$(
+				{
+					tr -dc "$lower" </dev/urandom | head -c1
+					tr -dc "$upper" </dev/urandom | head -c1
+					tr -dc "$numbers" </dev/urandom | head -c1
+					tr -dc "$special" </dev/urandom | head -c1
+					if ((remaining > 0)); then
+						tr -dc "$lower$upper$numbers$special" </dev/urandom | head -c "$remaining"
+					fi
+				} | fold -w1 | shuf | tr -d '\n'
+			)
+		else
+			PASS=$(tr -dc "$CPX" </dev/urandom | head -c "$MAX")
+		fi
 	fi
+
 	echo -e "${BOLD}$PASS${FECHA}"
 	case $(uname -s) in
 	Darwin)
