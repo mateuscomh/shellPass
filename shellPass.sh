@@ -4,7 +4,7 @@ export LANG=C
 #----------------------------------------------------|
 #  Matheus Martins 3mhenrique@gmail.com
 #  https://github.com/mateuscomh/yoURL
-#  30/03/2021 3.9.2 GPL3
+#  30/03/2021 3.9.3 GPL3
 #  Generate secure passwords on terminal
 #  Depends: words; xclip on GNU/Linux / pbcopy on IOS
 #----------------------------------------------------|
@@ -14,7 +14,7 @@ BOLD=$(tput bold)
 ITALIC=$(tput dim)
 
 main() {
-	local VERSION="Ver:3.9.2"
+	local VERSION="Ver:3.9.3"
 	local AUTHOR="Matheus Martins-3mhenrique@gmail.com"
 	local USAGE="Generate random passwords from CLI
 ███████╗██╗  ██╗███████╗██╗     ██╗     ██████╗  █████╗ ▄▄███▄▄·▄▄███▄▄·
@@ -67,11 +67,11 @@ _checkSize() {
 _checkType() {
 	while ! [[ "$TYPE" =~ ^[1-4]$|^[qQ]$ ]]; do
 		echo -e "${BOLD} Enter the TYPE [1-4] for password complexity or [Q]uit ${FECHA}
-    ${ITALIC}1${RESET} - Numbers only
-    ${ITALIC}2${RESET} - Letters and numbers
-    ${ITALIC}3${RESET} - Letters, numbers and special chars
-    ${ITALIC}4${RESET} - Random words
-${BOLD}Option for $MAX characters:${RESET}"
+    ${ITALIC}1${FECHA} - Numbers only
+    ${ITALIC}2${FECHA} - Letters and numbers
+    ${ITALIC}3${FECHA} - Letters, numbers and special chars
+    ${ITALIC}4${FECHA} - Random words
+		${BOLD}Option for $MAX characters:${FECHA}"
 		read -rsn1 TYPE
 	done
 }
@@ -114,10 +114,8 @@ _makePass() {
 		3) charsets=('a-z' 'A-Z' '0-9' '!"#$%&'\''()*+,-./:;<=>?@[\]^_{|}~') ;;
 		esac
 
-		local combined=$(
-			IFS=
-			echo "${charsets[*]}"
-		)
+		local IFS=''
+		local combined="${charsets[*]}"
 
 		if [[ "$TYPE" =~ [23] ]] && ((MAX > ${#charsets[@]})); then
 			local remaining=$((MAX - ${#charsets[@]}))
@@ -155,8 +153,9 @@ _makePass() {
 
 _writeinfile() {
 	local SCRIPT_PATH="${BASH_SOURCE[0]}"
-	local AB_SCRIPT_PATH="$(readlink -f "$SCRIPT_PATH")"
-	local AB_DIR="$(dirname "$AB_SCRIPT_PATH")"
+	local AB_SCRIPT_PATH AB_DIR
+	AB_SCRIPT_PATH=$(readlink -f "$SCRIPT_PATH")
+	AB_DIR=$(dirname "$AB_SCRIPT_PATH")
 	local HISTORY_FILE="$AB_DIR/history.log"
 
 	[ -f "$HISTORY_FILE" ] && tail -n9 "$HISTORY_FILE" >"${HISTORY_FILE}.tmp"
