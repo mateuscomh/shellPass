@@ -4,7 +4,7 @@ export LANG=C
 #----------------------------------------------------|
 #  Matheus Martins 3mhenrique@gmail.com
 #  https://github.com/mateuscomh/yoURL
-#  30/03/2021 3.9.3 GPL3
+#  30/03/2021 3.9.5 GPL3
 #  Generate secure passwords on terminal
 #  Depends: words; xclip on GNU/Linux / pbcopy on IOS
 #----------------------------------------------------|
@@ -14,7 +14,7 @@ BOLD=$(tput bold)
 ITALIC=$(tput dim)
 
 main() {
-	local VERSION="Ver:3.9.3"
+	local VERSION="Ver:3.9.5"
 	local AUTHOR="Matheus Martins-3mhenrique@gmail.com"
 	local USAGE="Generate random passwords from CLI
 ███████╗██╗  ██╗███████╗██╗     ██╗     ██████╗  █████╗ ▄▄███▄▄·▄▄███▄▄·
@@ -41,9 +41,9 @@ main() {
 		;;
 	esac
 
-	_generateCharacterSets
+	_generateCharSets
 	_makePass
-	_writeinfile
+	_writeFile
 }
 
 _checkSize() {
@@ -71,12 +71,12 @@ _checkType() {
     ${ITALIC}2${FECHA} - Letters and numbers
     ${ITALIC}3${FECHA} - Letters, numbers and special chars
     ${ITALIC}4${FECHA} - Random words
-		${BOLD}Option for $MAX characters:${FECHA}"
+${BOLD}Option for $MAX characters:${FECHA}"
 		read -rsn1 TYPE
 	done
 }
 
-_generateCharacterSets() {
+_generateCharSets() {
 	case "$TYPE" in
 	1) CPX='0-9' ;;
 	2) CPX='a-zA-Z0-9' ;;
@@ -90,11 +90,48 @@ _generateCharacterSets() {
 			return 1
 			;;
 		esac
+
 		[ -f "$DICT" ] || {
 			echo "Dictionary not found"
 			return 1
 		}
-		CPX=$(shuf -n "$MAX" "$DICT" | tr '\n' '-' | sed 's/-$//')
+
+		echo -e "\n${BOLD}Choose separator or [Q]uit:${FECHA}"
+		echo -e "Default is '-' "
+		echo "1)${ITALIC} Hyphen${FECHA} (-)"
+		echo "2)${ITALIC} Colon ${FECHA}(:)"
+		echo "3)${ITALIC} Semicolon${FECHA} (;)"
+		echo "4)${ITALIC} Space ${FECHA}( )"
+		while true; do
+			read -rsn1 -p "${BOLD}Your choice [1-4]:${FECHA}" SEP_CHOICE
+			echo
+			[[ -z "$SEP_CHOICE" ]] && SEP_CHOICE=1
+			case "$SEP_CHOICE" in
+			1)
+				SEPARATOR="-"
+				break
+				;;
+			2)
+				SEPARATOR=":"
+				break
+				;;
+			3)
+				SEPARATOR=";"
+				break
+				;;
+			4)
+				SEPARATOR=" "
+				break
+				;;
+			q | Q)
+				echo "Bye..."
+				exit
+				;;
+			*) echo "${ITALIC}Invalid option, try again${FECHA}" ;;
+			esac
+		done
+
+		CPX=$(shuf -n "$MAX" "$DICT" | tr '\n' "$SEPARATOR" | sed "s/\\${SEPARATOR}\$//")
 		;;
 	q | Q)
 		echo "Bye..."
@@ -102,7 +139,6 @@ _generateCharacterSets() {
 		;;
 	esac
 }
-
 _makePass() {
 	if [[ "$TYPE" -eq 4 ]]; then
 		PASS=$(echo "$CPX" | tr '[:upper:]' '[:lower:]' | iconv -f UTF-8 -t ASCII//TRANSLIT | sed "s/'s//g")
@@ -151,7 +187,7 @@ _makePass() {
 	esac
 }
 
-_writeinfile() {
+_writeFile() {
 	local SCRIPT_PATH="${BASH_SOURCE[0]}"
 	local AB_SCRIPT_PATH AB_DIR
 	AB_SCRIPT_PATH=$(readlink -f "$SCRIPT_PATH")
