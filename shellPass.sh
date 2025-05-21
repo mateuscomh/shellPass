@@ -4,7 +4,7 @@ export LANG=C
 #----------------------------------------------------|
 #  Matheus Martins 3mhenrique@gmail.com
 #  https://github.com/mateuscomh/yoURL
-#  30/03/2021 3.9.5 GPL3
+#  30/03/2021 3.9.6 GPL3
 #  Generate secure passwords on terminal
 #  Depends: words; xclip on GNU/Linux / pbcopy on IOS
 #----------------------------------------------------|
@@ -14,7 +14,7 @@ BOLD=$(tput bold)
 ITALIC=$(tput dim)
 
 main() {
-	local VERSION="Ver:3.9.5"
+	local VERSION="Ver:3.9.6"
 	local AUTHOR="Matheus Martins-3mhenrique@gmail.com"
 	local USAGE="Generate random passwords from CLI
 ███████╗██╗  ██╗███████╗██╗     ██╗     ██████╗  █████╗ ▄▄███▄▄·▄▄███▄▄·
@@ -101,9 +101,10 @@ _generateCharSets() {
 		echo "1)${ITALIC} Hyphen${FECHA} (-)"
 		echo "2)${ITALIC} Colon ${FECHA}(:)"
 		echo "3)${ITALIC} Semicolon${FECHA} (;)"
-		echo "4)${ITALIC} Space ${FECHA}( )"
+		echo "4)${ITALIC} Comma ${FECHA}(,)"
+		echo "5)${ITALIC} Space ${FECHA}( )"
 		while true; do
-			read -rsn1 -p "${BOLD}Your choice [1-4]:${FECHA}" SEP_CHOICE
+			read -rsn1 -p "${BOLD}Your choice [1-5]:${FECHA}" SEP_CHOICE
 			echo
 			[[ -z "$SEP_CHOICE" ]] && SEP_CHOICE=1
 			case "$SEP_CHOICE" in
@@ -120,6 +121,10 @@ _generateCharSets() {
 				break
 				;;
 			4)
+				SEPARATOR=","
+				break
+				;;
+			5)
 				SEPARATOR=" "
 				break
 				;;
