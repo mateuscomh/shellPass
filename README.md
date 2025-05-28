@@ -1,52 +1,58 @@
-# shellPass - Shell Script Password Generator
+# shellPass - Secure Password Generator for Terminal
 
-[![Release](https://img.shields.io/badge/release-3.9.6-brightgreen)](https://github.com/mateuscomh/shellPass/releases)
+[![Release](https://img.shields.io/badge/version-4.0.0-blue)](https://github.com/mateuscomh/shellPass/releases/latest)
+[![License](https://img.shields.io/badge/license-GPL--3.0-orange)](https://github.com/mateuscomh/shellPass/blob/main/LICENSE)
 [![Build Status](https://github.com/mateuscomh/shellPass/actions/workflows/super-linter.yml/badge.svg)](https://github.com/mateuscomh/shellPass/actions/workflows/super-linter.yml)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/mateuscomh/shellPass/pulls)
 
-## Overview
+A lightweight, secure, and customizable password generator for command-line enthusiasts.
 
-shellPass is a fast, simple, and powerful open-source utility tool designed for generating unique and random passwords in the terminal. This script was authored by me and is compatible with MacOS, GNU/Linux, and WSL2 environments.
+## ✨ Features
 
-The program offers options to customize both the length and complexity of generated passwords. It utilizes the special `/dev/random` folder to ensure the generation of secure and unique passwords.
+- Generate cryptographically secure passwords using /dev/random
+- Blazing fast execution with zero dependencies
+- Customizable password length and complexity
+- Cross-platform support (Linux, macOS, WSL2)
+- Copy to clipboard functionality (where available)
+- Multiple password generation in one command
+- Strength indicator for generated passwords
 
+## 🚀 Installation
 
-![Screenshot](https://github.com/mateuscomh/shellPass/blob/main/files/screenshot.png)
+### Basic Installation
+```bash
+git clone https://github.com/mateuscomh/shellPass.git
+cd shellPass
+chmod +x shellPass.sh
+```
+### System-wide Installation (Optional)
+```bash
+sudo cp shellPass.sh /usr/local/bin/shellpass
+```
+Basic password generation:
+    To generate a default 12-character password, run:
+```bash
+$ ./shellPass.sh
+```
 
-## Motivation
+To generate a password with specific length (ex: 20 chars):
+```bash
+$ ./shellPass.sh 20
+```
+To generate multiple passwords (ex: 5 passwords of 16 chars each):
+```bash
+$ ./shellPass.sh 16 5
+```
+To show the help menu with all available options:
+```bash
+$ ./shellPass.sh -h
+```
 
-The motivation behind the shellPass project was to fulfill my personal need for an accessible password generator in the terminal. With shellPass, I aimed to create a straightforward and effective solution for generating secure and unique passwords whenever needed.
-
-## Key Features
-
-- Fast and easy generation of secure passwords
-- Customize the length of passwords
-- Works on GNU/Linux and macOS terminals
-
-## Installation and Usage
-
-Follow the steps below to install and start using shellPass:
-
-1. Clone this repository:
-
-   ```bash
-   git clone https://github.com/mateuscomh/shellPass.git && cd shellPass
-   ```
-   
-2. Grant execution permission to the script:
-
-   ```bash
-   chmod +x shellPass.sh
-   ```
-
-3. Run the script in the terminal, specifying the desired number of characters for the password:
-
-   ```bash
-   ./shellPass.sh 15
-   # or simply
-   ./shellPass.sh
-   ```
-
-* Recommendation: Create an alias to expedite the process! *
+Pro Tip:
+For quick access, add this alias to your shell configuration file (.bashrc, .zshrc, etc.):
+```bash
+$ alias passgen='~/path/to/shellPass.sh'
+```
 
 ## Contribution
 Contributions to this project are welcome. If you have any suggestions, bug fixes, or improvements, feel free to open an issue or submit a pull request.
@@ -55,4 +61,3 @@ Contributions to this project are welcome. If you have any suggestions, bug fixe
 This project is licensed under the GPL-3.0 License. See the [LICENSE](https://github.com/mateuscomh/shellPass/blob/main/LICENSE) file for more details.
 
 Made with ❤️ by [Matheus Martins](https://www.linkedin.com/in/matheushsmartins)
-

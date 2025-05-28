@@ -4,18 +4,16 @@ export LANG=C
 #----------------------------------------------------|
 #  Matheus Martins 3mhenrique@gmail.com
 #  https://github.com/mateuscomh/yoURL
-#  30/03/2021 3.9.6 GPL3
+#  30/03/2021 4.0.0 GPL3
 #  Generate secure passwords on terminal
 #  Depends: words; xclip on GNU/Linux / pbcopy on IOS
 #----------------------------------------------------|
 
-FECHA=$(tput sgr0)
+CLOSE=$(tput sgr0)
 BOLD=$(tput bold)
 ITALIC=$(tput dim)
 
 main() {
-	local VERSION="Ver:3.9.6"
-	local AUTHOR="Matheus Martins-3mhenrique@gmail.com"
 	local USAGE="Generate random passwords from CLI
 ███████╗██╗  ██╗███████╗██╗     ██╗     ██████╗  █████╗ ▄▄███▄▄·▄▄███▄▄·
 ██╔════╝██║  ██║██╔════╝██║     ██║     ██╔══██╗██╔══██╗██╔════╝██╔════╝
@@ -24,6 +22,8 @@ main() {
 ███████║██║  ██║███████╗███████╗███████╗██║     ██║  ██║███████║███████║
 ╚══════╝╚═╝  ╚═╝╚══════╝╚══════╝╚══════╝╚═╝     ╚═╝  ╚═╝╚═▀▀▀══╝╚═▀▀▀══╝"
 
+	local VERSION="Ver:4.0.0"
+	local AUTHOR="Matheus Martins-3mhenrique@gmail.com"
 	local MAX="$1"
 	local TYPE="$2"
 
@@ -31,7 +31,7 @@ main() {
 
 	case "$MAX" in
 	h | -h | v | -v | --version)
-		echo -e "${ITALIC} $VERSION / $AUTHOR ${FECHA}"
+		echo -e "${ITALIC} $VERSION / $AUTHOR ${CLOSE}"
 		return
 		;;
 	*)
@@ -49,10 +49,10 @@ main() {
 _checkSize() {
 	while [[ -z "$MAX" || ! "$MAX" =~ ^[1-9][0-9]{0,3}$ || ${#MAX} -gt 4 ]]; do
 		if [[ ${#MAX} -gt 4 ]]; then
-			echo "${BOLD}  Enter up to 4 digits for the password or [Q]uit.${FECHA}"
+			echo "${BOLD}  Enter up to 4 digits for the password or [Q]uit.${CLOSE}"
 			read -r MAX
 		else
-			echo -e "${BOLD} Enter the QUANTITY of characters for the password or [Q]uit: ${FECHA}"
+			echo -e "${BOLD} Enter the QUANTITY of characters for the password or [Q]uit: ${CLOSE}"
 			read -r MAX
 		fi
 
@@ -66,12 +66,12 @@ _checkSize() {
 
 _checkType() {
 	while ! [[ "$TYPE" =~ ^[1-4]$|^[qQ]$ ]]; do
-		echo -e "${BOLD} Enter the TYPE [1-4] for password complexity or [Q]uit ${FECHA}
-    ${ITALIC}1${FECHA} - Numbers only
-    ${ITALIC}2${FECHA} - Letters and numbers
-    ${ITALIC}3${FECHA} - Letters, numbers and special chars
-    ${ITALIC}4${FECHA} - Random words
-${BOLD}Option for $MAX characters:${FECHA}"
+		echo -e "${BOLD} Enter the TYPE [1-4] for password complexity or [Q]uit ${CLOSE}
+    ${ITALIC}1${CLOSE} - Numbers only
+    ${ITALIC}2${CLOSE} - Letters and numbers
+    ${ITALIC}3${CLOSE} - Letters, numbers and special chars
+    ${ITALIC}4${CLOSE} - Random words
+${BOLD}Option for $MAX characters:${CLOSE}"
 		read -rsn1 TYPE
 	done
 }
@@ -96,15 +96,15 @@ _generateCharSets() {
 			return 1
 		}
 
-		echo -e "\n${BOLD}Choose separator or [Q]uit:${FECHA}"
+		echo -e "\n${BOLD}Choose separator or [Q]uit:${CLOSE}"
 		echo -e "Default is '-' "
-		echo "1)${ITALIC} Hyphen${FECHA} (-)"
-		echo "2)${ITALIC} Colon ${FECHA}(:)"
-		echo "3)${ITALIC} Semicolon${FECHA} (;)"
-		echo "4)${ITALIC} Comma ${FECHA}(,)"
-		echo "5)${ITALIC} Space ${FECHA}( )"
+		echo "1)${ITALIC} Hyphen${CLOSE} (-)"
+		echo "2)${ITALIC} Colon ${CLOSE}(:)"
+		echo "3)${ITALIC} Semicolon${CLOSE} (;)"
+		echo "4)${ITALIC} Comma ${CLOSE}(,)"
+		echo "5)${ITALIC} Space ${CLOSE}( )"
 		while true; do
-			read -rsn1 -p "${BOLD}Your choice [1-5]:${FECHA}" SEP_CHOICE
+			read -rsn1 -p "${BOLD}Your choice [1-5]:${CLOSE}" SEP_CHOICE
 			echo
 			[[ -z "$SEP_CHOICE" ]] && SEP_CHOICE=1
 			case "$SEP_CHOICE" in
@@ -132,7 +132,7 @@ _generateCharSets() {
 				echo "Bye..."
 				exit
 				;;
-			*) echo "${ITALIC}Invalid option, try again${FECHA}" ;;
+			*) echo "${ITALIC}Invalid option, try again${CLOSE}" ;;
 			esac
 		done
 
@@ -174,7 +174,7 @@ _makePass() {
 		fi
 	fi
 
-	echo -e "${BOLD}$PASS${FECHA}"
+	echo -e "${BOLD}$PASS${CLOSE}"
 
 	case $(uname -s) in
 	Darwin) printf %s "$PASS" | pbcopy ;;
