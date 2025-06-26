@@ -60,18 +60,18 @@ _checkSize() {
 			echo "Bye..."
 			exit 0
 		}
-		[[ ${#MAX} -gt 4 ]] && MAX=""
+#		[[ ${#MAX} -gt 4 ]] && MAX=""
 	done
 }
 
 _checkType() {
 	while ! [[ "$TYPE" =~ ^[1-4]$|^[qQ]$ ]]; do
-		echo -e "${BOLD} Enter the TYPE [1-4] for password complexity or [Q]uit ${CLOSE}
-    ${ITALIC}1${CLOSE} - Numbers only
-    ${ITALIC}2${CLOSE} - Letters and numbers
-    ${ITALIC}3${CLOSE} - Letters, numbers and special chars
-    ${ITALIC}4${CLOSE} - Random words
-${BOLD}Option for $MAX characters:${CLOSE}"
+		echo -e "${BOLD} Enter the TYPE [1-4] for password complexity or [Q]uit ${FECHA}
+    ${ITALIC}1${FECHA} - Numbers only
+    ${ITALIC}2${FECHA} - Letters and numbers
+    ${ITALIC}3${FECHA} - Letters, numbers and special chars
+    ${ITALIC}4${FECHA} - Random words"
+		echo -e "${BOLD}Option for $MAX characters: (Choose 1-4 or Q)${FECHA}"
 		read -rsn1 TYPE
 	done
 }
@@ -92,7 +92,8 @@ _generateCharSets() {
 		esac
 
 		[ -f "$DICT" ] || {
-			echo "Dictionary not found"
+			echo -e "${BOLD}Dictionary not found.${FECHA}"
+			echo -e "Please install it. For Debian/Ubuntu, try: ${ITALIC}sudo apt install wamerican${FECHA}"
 			return 1
 		}
 
