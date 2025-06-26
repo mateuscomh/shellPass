@@ -4,7 +4,7 @@ export LANG=C
 #----------------------------------------------------|
 #  Matheus Martins 3mhenrique@gmail.com
 #  https://github.com/mateuscomh/yoURL
-#  30/03/2021 4.0.0 GPL3
+#  30/03/2021 4.0.1 GPL3
 #  Generate secure passwords on terminal
 #  Depends: words; xclip on GNU/Linux / pbcopy on IOS
 #----------------------------------------------------|
@@ -22,7 +22,7 @@ main() {
 ███████║██║  ██║███████╗███████╗███████╗██║     ██║  ██║███████║███████║
 ╚══════╝╚═╝  ╚═╝╚══════╝╚══════╝╚══════╝╚═╝     ╚═╝  ╚═╝╚═▀▀▀══╝╚═▀▀▀══╝"
 
-	local VERSION="Ver:4.0.0"
+	local VERSION="Ver:4.0.1"
 	local AUTHOR="Matheus Martins-3mhenrique@gmail.com"
 	local MAX="$1"
 	local TYPE="$2"
@@ -66,12 +66,12 @@ _checkSize() {
 
 _checkType() {
 	while ! [[ "$TYPE" =~ ^[1-4]$|^[qQ]$ ]]; do
-		echo -e "${BOLD} Enter the TYPE [1-4] for password complexity or [Q]uit ${FECHA}
-    ${ITALIC}1${FECHA} - Numbers only
-    ${ITALIC}2${FECHA} - Letters and numbers
-    ${ITALIC}3${FECHA} - Letters, numbers and special chars
-    ${ITALIC}4${FECHA} - Random words"
-		echo -e "${BOLD}Option for $MAX characters: (Choose 1-4 or Q)${FECHA}"
+		echo -e "${BOLD} Enter the TYPE [1-4] for password complexity or [Q]uit ${CLOSE}
+    ${ITALIC}1${CLOSE} - Numbers only
+    ${ITALIC}2${CLOSE} - Letters and numbers
+    ${ITALIC}3${CLOSE} - Letters, numbers and special chars
+    ${ITALIC}4${CLOSE} - Random words"
+		echo -e "${BOLD}Option for $MAX characters: (Choose 1-4 or Q)${CLOSE}"
 		read -rsn1 TYPE
 	done
 }
@@ -92,8 +92,8 @@ _generateCharSets() {
 		esac
 
 		[ -f "$DICT" ] || {
-			echo -e "${BOLD}Dictionary not found.${FECHA}"
-			echo -e "Please install it. For Debian/Ubuntu, try: ${ITALIC}sudo apt install wamerican${FECHA}"
+			echo -e "${BOLD}Dictionary not found.${CLOSE}"
+			echo -e "Please install it. For Debian/Ubuntu, try: ${ITALIC}sudo apt install wamerican${CLOSE}"
 			return 1
 		}
 
