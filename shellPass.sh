@@ -9,10 +9,6 @@ export LANG=C
 #  Depends: words; xclip on GNU/Linux / pbcopy on IOS
 #----------------------------------------------------|
 
-CLOSE=$(tput sgr0)
-BOLD=$(tput bold)
-ITALIC=$(tput dim)
-
 main() {
 	local USAGE="Generate random passwords from CLI
 ███████╗██╗  ██╗███████╗██╗     ██╗     ██████╗  █████╗ ▄▄███▄▄·▄▄███▄▄·
@@ -60,7 +56,7 @@ _checkSize() {
 			echo "Bye..."
 			exit 0
 		}
-#		[[ ${#MAX} -gt 4 ]] && MAX=""
+		#		[[ ${#MAX} -gt 4 ]] && MAX=""
 	done
 }
 
@@ -145,6 +141,7 @@ _generateCharSets() {
 		;;
 	esac
 }
+
 _makePass() {
 	if [[ "$TYPE" -eq 4 ]]; then
 		PASS=$(echo "$CPX" | tr '[:upper:]' '[:lower:]' | iconv -f UTF-8 -t ASCII//TRANSLIT | sed "s/'s//g")
@@ -204,5 +201,9 @@ _writeFile() {
 	mv "${HISTORY_FILE}.tmp" "$HISTORY_FILE" 2>/dev/null || touch "$HISTORY_FILE"
 	echo "$(date '+%d/%m/%y %H:%M:%S') - $PASS" >>"$HISTORY_FILE"
 }
+
+CLOSE=$(tput sgr0)
+BOLD=$(tput bold)
+ITALIC=$(tput dim)
 
 main "$@"
