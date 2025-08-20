@@ -1,6 +1,6 @@
 # shellPass - Secure Password Generator for Terminal
 
-[![Release](https://img.shields.io/badge/version-4.0.2-blue)](https://github.com/mateuscomh/shellPass/releases/latest)
+[![Release](https://img.shields.io/badge/version-4.1.0-blue)](https://github.com/mateuscomh/shellPass/releases/latest)
 [![License](https://img.shields.io/badge/license-GPL--3.0-orange)](https://github.com/mateuscomh/shellPass/blob/main/LICENSE)
 [![Build Status](https://github.com/mateuscomh/shellPass/actions/workflows/super-linter.yml/badge.svg)](https://github.com/mateuscomh/shellPass/actions/workflows/super-linter.yml)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/mateuscomh/shellPass/pulls)

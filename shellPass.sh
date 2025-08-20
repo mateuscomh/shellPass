@@ -4,7 +4,7 @@ export LANG=C
 #----------------------------------------------------|
 #  Matheus Martins 3mhenrique@gmail.com
 #  https://github.com/mateuscomh/yoURL
-#  30/03/2021 4.0.2 GPL3
+#  30/03/2021 4.1.0 GPL3
 #  Generate secure passwords on terminal
 #  Depends: words; xclip on GNU/Linux / pbcopy on IOS
 #----------------------------------------------------|
@@ -18,7 +18,7 @@ main() {
 ███████║██║  ██║███████╗███████╗███████╗██║     ██║  ██║███████║███████║
 ╚══════╝╚═╝  ╚═╝╚══════╝╚══════╝╚══════╝╚═╝     ╚═╝  ╚═╝╚═▀▀▀══╝╚═▀▀▀══╝"
 
-	local VERSION="Ver:4.0.2"
+	local VERSION="Ver:4.1.0"
 	local AUTHOR="Matheus Martins-3mhenrique@gmail.com"
 	local MAX="$1"
 	local TYPE="$2"
@@ -28,7 +28,7 @@ main() {
 	case "$MAX" in
 	h | -h | v | -v | --version)
 		echo -e "${ITALIC} $VERSION / $AUTHOR ${CLOSE}"
-		return
+		exit 0
 		;;
 	*)
 		echo "$VERSION"
@@ -156,7 +156,7 @@ _makePass() {
 		local IFS=''
 		local combined="${charsets[*]}"
 
-		if [[ "$TYPE" =~ [23] ]] && ((MAX > ${#charsets[@]})); then
+		if [[ "$TYPE" =~ [23] ]]; then
 			local remaining=$((MAX - ${#charsets[@]}))
 
 			PASS=$(
@@ -179,6 +179,7 @@ _makePass() {
 	Linux)
 		if grep -iq Microsoft /proc/version; then
 			printf "%s" "$PASS" | clip.exe
+			command -v clip.exe > /dev/null || echo "clip.exe não encontrado"
 		elif command -v xclip >/dev/null && [ -n "$DISPLAY" ]; then
 			printf "%s" "$PASS" | xclip -sel clip
 		fi
@@ -193,7 +194,11 @@ _makePass() {
 _writeFile() {
 	local SCRIPT_PATH="${BASH_SOURCE[0]}"
 	local AB_SCRIPT_PATH AB_DIR
-	AB_SCRIPT_PATH=$(readlink -f "$SCRIPT_PATH")
+	if command -v readlink >/dev/null; then
+		AB_SCRIPT_PATH=$(readlink -f "$SCRIPT_PATH")
+	else
+		AB_SCRIPT_PATH=$(cd "$(dirname "$SCRIPT_PATH")" && pwd)/$(basename "$SCRIPT_PATH")
+	fi
 	AB_DIR=$(dirname "$AB_SCRIPT_PATH")
 	local HISTORY_FILE="$AB_DIR/history.log"
 
