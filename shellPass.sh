@@ -4,7 +4,7 @@ export LANG=C
 #----------------------------------------------------|
 #  Matheus Martins 3mhenrique@gmail.com
 #  https://github.com/mateuscomh/yoURL
-#  30/03/2021 4.1.0 GPL3
+#  30/03/2021 4.1.1 GPL3
 #  Generate secure passwords on terminal
 #  Depends: words; xclip on GNU/Linux / pbcopy on IOS
 #----------------------------------------------------|
@@ -18,7 +18,7 @@ main() {
 ███████║██║  ██║███████╗███████╗███████╗██║     ██║  ██║███████║███████║
 ╚══════╝╚═╝  ╚═╝╚══════╝╚══════╝╚══════╝╚═╝     ╚═╝  ╚═╝╚═▀▀▀══╝╚═▀▀▀══╝"
 
-	local VERSION="Ver:4.1.0"
+	local VERSION="Ver:4.1.1"
 	local AUTHOR="Matheus Martins-3mhenrique@gmail.com"
 	local MAX="$1"
 	local TYPE="$2"
@@ -56,7 +56,6 @@ _checkSize() {
 			echo "Bye..."
 			exit 0
 		}
-		#		[[ ${#MAX} -gt 4 ]] && MAX=""
 	done
 }
 
@@ -179,7 +178,7 @@ _makePass() {
 	Linux)
 		if grep -iq Microsoft /proc/version; then
 			printf "%s" "$PASS" | clip.exe
-			command -v clip.exe > /dev/null || echo "clip.exe não encontrado"
+			command -v clip.exe >/dev/null || echo "clip.exe não encontrado"
 		elif command -v xclip >/dev/null && [ -n "$DISPLAY" ]; then
 			printf "%s" "$PASS" | xclip -sel clip
 		fi
